@@ -62,6 +62,6 @@ Card data is sourced from [JSON Against Humanity](https://crhallberg.com/cah/).
 
 ## License
 
-REST Against Humanity is made available under a [Creative Commons CC-BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+REST Against Humanity is made available under a [Creative Commons BY-NC-SA 4.0 license](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 
