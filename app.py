@@ -12,7 +12,7 @@ async def get_packs(packs: str = None):
 
     if packs:
         valid_packs = [p["name"] for p in cards_json]
-        if not any(p not in valid_packs for p in packs.split(",")):
+        if all(p in valid_packs for p in packs.split(",")):
             selected_packs = [p for p in cards_json if p["name"] in packs.split(",")]
 
             black = []
