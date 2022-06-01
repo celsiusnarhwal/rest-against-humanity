@@ -1,0 +1,30 @@
+app: rest-against-humanity
+org: celsiusnarhwal
+service: rest-against-humanity
+package:
+  individually: true
+provider:
+  name: aws
+  profile: ${opt:aws-profile, "default"}
+  region: "us-east-1"
+  stage: ${opt:stage, "prod"}
+  runtime: python3.9
+
+plugins:
+  - serverless-offline
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: false
+    usePoetry: true
+
+functions:
+  app:
+    handler: app.handler
+    environment:
+      STAGE: ${self:provider.stage}
+    events:
+      - http:
+          method: get
+          path: /
