@@ -13,11 +13,16 @@ provider:
 plugins:
   - serverless-offline
   - serverless-python-requirements
+  - serverless-domain-manager
 
 custom:
   pythonRequirements:
-    dockerizePip: false
     usePoetry: true
+  customDomain:
+    domainName: restagainsthumanity.com
+    basePath: /
+    stage: ${self.provider.stage}
+    createRoute53Record: true
 
 functions:
   app:
