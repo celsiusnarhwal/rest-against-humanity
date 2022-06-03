@@ -11,8 +11,7 @@ async def get_packs(packs: str = None):
     cards_json = json.load(open("cards.json"))
 
     if packs:
-        valid_packs = [p["name"] for p in cards_json]
-        if all(p in valid_packs for p in packs.split(",")):
+        if all(p in [pk["name"] for pk in cards_json] for p in packs.split(",")):
             selected_packs = [p for p in cards_json if p["name"] in packs.split(",")]
 
             black = []
