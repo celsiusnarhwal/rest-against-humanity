@@ -1,12 +1,17 @@
 import json
 
 from fastapi import FastAPI
-from mangum import Mangum
+from fastapi.responses import HTMLResponse
 
 app = FastAPI()
 
 
 @app.get("/")
+def home():
+    return HTMLResponse(open("README.html").read())
+
+
+@app.get("/api")
 async def get_packs(packs: str = None):
     cards_json = json.load(open("cards.json"))
 
@@ -30,6 +35,3 @@ async def get_packs(packs: str = None):
             return {"error": "Your request included one or more invalid pack names"}
     else:
         return [p["name"] for p in cards_json]
-
-
-handler = Mangum(app)

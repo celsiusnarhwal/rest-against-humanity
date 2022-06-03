@@ -5,26 +5,29 @@ You can use it to programatically obtain sets of cards from any of Cards Against
 
 ## Usage
 
-REST Against Humanity can be accessed at [rest-against-humanity-rlpdt.ondigitalocean.app](https://rest-against-humanity-rlpdt.ondigitalocean.app) (Sorry about the URL - I'll have a proper domain name soon.)
+REST Against Humanity can be accessed at [restagainsthumanity.com/api](https://restagainsthumanity.com/api).
 
-To obtain a list of all available packs, just shoot a GET request to the root URL:
+To obtain a list of all available packs, just shoot a GET request to the root endpoint:
 
 ```http request
-GET rest-against-humanity-rlpdt.ondigitalocean.app
+GET restagainsthumanity.com/api
+```
 
-# [ "CAH Base Set", "2012 Holiday Pack", "2013 Holiday Pack", "2014 Holiday Pack", "90s Nostalgia Pack", ...]
+You'll get a list of available packs as the response:
+```json
+[ "CAH Base Set", "2012 Holiday Pack", "2013 Holiday Pack", "2014 Holiday Pack", "90s Nostalgia Pack", "..."]
 ```
 
 To obtain cards from one or more packs, just tack on the `packs` parameter:
 
 ```http request
-GET rest-against-humanity-rlpdt.ondigitalocean.app?packs=CAH Base Set
+GET restagainsthumanity.com/api?packs=CAH Base Set
 ```
 
 For multiple packs, separate them with commas:
 
 ```http request
-GET rest-against-humanity-rlpdt.ondigitalocean.app?packs=CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack
+GET restagainsthumanity.com/api?packs=CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack
 ```
 
 The response will come formatted like this:
