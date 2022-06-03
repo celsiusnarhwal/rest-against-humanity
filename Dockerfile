@@ -8,4 +8,4 @@ COPY . .
 RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN poetry config virtualenvs.create false && poetry install --no-dev
 
-ENTRYPOINT ["uvicorn", "app:app", "--host", "${APP_DOMAIN}"]
+ENTRYPOINT ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
