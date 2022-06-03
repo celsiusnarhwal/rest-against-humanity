@@ -15,7 +15,7 @@ GET restagainsthumanity.com/api
 
 You'll get a list of available packs as the response:
 ```json
-[ "CAH Base Set", "2012 Holiday Pack", "2013 Holiday Pack", "2014 Holiday Pack", "90s Nostalgia Pack", "..."]
+["CAH Base Set", "2012 Holiday Pack", "2013 Holiday Pack", "2014 Holiday Pack", "90s Nostalgia Pack", "..."]
 ```
 
 To obtain cards from one or more packs, just tack on the `packs` parameter:
