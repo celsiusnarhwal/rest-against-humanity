@@ -10,4 +10,4 @@ RUN poetry config virtualenvs.create false && poetry install --no-dev
 RUN wget https://raw.githubusercontent.com/celsiusnarhwal/github-markdown-css/main/github-css.html
 RUN gh-md-to-html README.md -c -x github-css.html
 
-ENTRYPOINT ["uvicorn", "src.app:app", "--host", "0.0.0.0", "--port", "8080"]
+ENTRYPOINT ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
