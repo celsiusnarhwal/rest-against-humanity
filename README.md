@@ -5,12 +5,12 @@ You can use it to programatically obtain sets of cards from any of Cards Against
 
 ## Usage
 
-REST Against Humanity can be accessed at https://h9sxh4yrj6.execute-api.us-east-1.amazonaws.com/prod/. (Sorry about the URL - I'll have a proper domain name soon.)
+REST Against Humanity can be accessed at [rest-against-humanity-rlpdt.ondigitalocean.app](https://rest-against-humanity-rlpdt.ondigitalocean.app) (Sorry about the URL - I'll have a proper domain name soon.)
 
 To obtain a list of all available packs, just shoot a GET request to the root URL:
 
 ```http request
-GET https://h9sxh4yrj6.execute-api.us-east-1.amazonaws.com/prod/
+GET rest-against-humanity-rlpdt.ondigitalocean.app
 
 # [ "CAH Base Set", "2012 Holiday Pack", "2013 Holiday Pack", "2014 Holiday Pack", "90s Nostalgia Pack", ...]
 ```
@@ -18,13 +18,13 @@ GET https://h9sxh4yrj6.execute-api.us-east-1.amazonaws.com/prod/
 To obtain cards from one or more packs, just tack on the `packs` parameter:
 
 ```http request
-GET https://h9sxh4yrj6.execute-api.us-east-1.amazonaws.com/prod/?packs=CAH Base Set
+GET rest-against-humanity-rlpdt.ondigitalocean.app?packs=CAH Base Set
 ```
 
 For multiple packs, separate them with commas:
 
 ```http request
-GET https://h9sxh4yrj6.execute-api.us-east-1.amazonaws.com/prod/?packs=CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack
+GET rest-against-humanity-rlpdt.ondigitalocean.app?packs=CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack
 ```
 
 The response will come formatted like this:
