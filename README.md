@@ -61,7 +61,12 @@ It may do you well to learn the [rules of Cards Against Humanity](https://s3.ama
 
 ## Attributions
 
+REST Against Humanity © celsius narhwal.
+
 Card data is sourced from [JSON Against Humanity](https://crhallberg.com/cah/).
+
+Writing from *Cards Against Humanity* © Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity, LLC. This software is in no way affiliated with or endorsed by Cards Against Humanity, LLC.
+
 
 ## License
 
