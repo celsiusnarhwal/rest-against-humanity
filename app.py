@@ -1,6 +1,6 @@
 import json
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
 
 app = FastAPI()
@@ -32,6 +32,6 @@ async def get_packs(packs: str = None):
 
             return {"white": white, "black": black}
         else:
-            return {"error": "Your request included one or more invalid pack names"}
+            raise HTTPException(status_code=400, detail="Your request included one or more invalid pack names")
     else:
         return [p["name"] for p in cards_json]
