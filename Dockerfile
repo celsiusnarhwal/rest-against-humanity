@@ -7,8 +7,8 @@ COPY . .
 
 RUN curl -sSL https://install.python-poetry.org | python3 -
 RUN poetry config virtualenvs.create false && poetry install --no-dev
+RUN poetry add gh-md-to-html
 RUN wget https://raw.githubusercontent.com/celsiusnarhwal/github-markdown-css/main/github-css.html
-RUN pip install gh-md-to-html
 RUN gh-md-to-html README.md -c -x github-css.html
 
 ENTRYPOINT ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8080"]
