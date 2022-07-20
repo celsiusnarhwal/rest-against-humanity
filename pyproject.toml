@@ -2,7 +2,7 @@
 name = "rest-against-humanity"
 version = "0.1.0"
 description = ""
-authors = ["celsius narhwal <70828899+celsiusnarhwal@users.noreply.github.com>"]
+authors = ["celsius narhwal <celsiusnarhwal@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
