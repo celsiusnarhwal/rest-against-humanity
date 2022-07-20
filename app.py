@@ -1,4 +1,5 @@
 import json
+import urllib.parse
 
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import HTMLResponse
@@ -16,8 +17,9 @@ async def get_packs(packs: str = None):
     cards_json = json.load(open("cards.json"))
 
     if packs:
-        if all(p in [pk["name"] for pk in cards_json] for p in packs.split(",")):
-            selected_packs = [p for p in cards_json if p["name"] in packs.split(",")]
+        packs = urllib.parse.unquote_plus(packs).split(",")
+        if all(p in [pk["name"] for pk in cards_json] for p in packs):
+            selected_packs = [p for p in cards_json if p["name"] in packs]
 
             black = []
             white = []
