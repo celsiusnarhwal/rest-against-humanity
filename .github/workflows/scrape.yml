@@ -1,0 +1,20 @@
+name: Scrape
+on:
+  deployment
+
+
+jobs:
+  scrape:
+    name: Scrape Website
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Run DocSearch Scraper
+        uses: celsiusnarhwal/typesense-scraper@v2
+        with:
+          api-key: ${{ secrets.TYPESENSE_API_KEY }}
+          host: typesense.celsiusnarhwal.dev
+          protocol: https
+          config: website/docsearch.config.json
