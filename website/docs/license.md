@@ -7,7 +7,7 @@ sidebar_position: 2
 
 ## Summary
 
-REST Against Humanity is licensed under the Creative Commons Attribution-ShareAlike 4.0 International License
+REST Against Humanity is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
 (CC BY-NC-SA 4.0, for short). In summary, this means you can do whatever you want with REST Against Humanity
 on the conditions that:
 
@@ -30,8 +30,6 @@ license and *Cards Against Humanity*'s license.
 The full terms of the license follow. For more information, visit [Creative Commons](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
 ## Full Terms
-
-#### Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
 
 By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License ("Public License"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
 

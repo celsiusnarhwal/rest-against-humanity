@@ -47,7 +47,9 @@ const config = {
             },
             footer: {
                 style: 'dark',
-                copyright: `REST Against Humanity © ${new Date().getFullYear()} celsius narhwal. REST Against Humanity is not affiliated with or endorsed by Cards Against Humanity, LLC.`,
+                copyright: `<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />The contents of this site are licensed under a <a rel="license" href="/docs/license">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
+                            <br><br>
+                            REST Against Humanity © ${new Date().getFullYear()} celsius narhwal. REST Against Humanity is not affiliated with or endorsed by Cards Against Humanity, LLC.`,
             },
             prism: {
                 theme: lightCodeTheme,
