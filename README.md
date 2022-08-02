@@ -2,7 +2,7 @@
 
 REST Against Humanity is a public API for [*Cards Against Humanity*](https://cardsagainsthumanity.com/).
 
-For documentation and other information, go to [restagainsthumanity.com](https://restagainsthumanity.com).
+For documentation and other information, go to [restagainsthumanity.com](https://restagainsthumanity.vercel.app).
 
 REST Against Humanity © celsius narhwal. All rights reserved.
 

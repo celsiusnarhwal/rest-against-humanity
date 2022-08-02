@@ -14,13 +14,31 @@ You can use it to programatically obtain sets of cards from any of *Cards Agains
 
 ## Usage
 
+:::danger Domain Change
+
+While restagainsthumanity.com undergoes a registrar change, REST Against Humanity is temporarily available at
+**restagainsthumanity.vercel.app**. Please substitute all references to restagainsthumanity.com in this
+documentation with the temporary domain. The temporary domain will continue to work even after
+restagainsthumanity.com is once again available. Check this page periodically for updates; when this warning is no
+longer present, restagainsthumanity.com will have returned.
+
+:::
+
+:::info
+
+The code examples provided here are just that - examples! Just because your preferred language doesn't appear here
+doesn't mean you can't use REST Against Humanity. As long as your language implements HTTP requests and responses -
+or has a third-party library that does - you're good.
+
+:::
+
 REST Against Humanity can be accessed at [restagainsthumanity.com/api](https://restagainsthumanity.com/api).
 
 ### Getting a List of Packs
 
 To obtain a list of all available packs, send a GET request to the root endpoint (`/api`).
 
-<Tabs>
+<Tabs groupId="languages">
 <TabItem value="py" label="Python">
 
 ```python
@@ -107,9 +125,11 @@ import "net/http"
 import "encoding/json"
 
 resp, err := http.Get("https://restagainsthumanity.com/api")
+
 if err != nil {
     panic(err)
 }
+
 defer resp.Body.Close()
 
 packs := make([]map[string]interface{}, 0)
@@ -135,7 +155,7 @@ You'll get a list of available packs as the response:
 
 To obtain cards, specify the packs you want using the `packs` parameter.
 
-<Tabs>
+<Tabs groupId="languages">
 <TabItem value="py" label="Python">
 
 ```python
@@ -307,7 +327,7 @@ Unexpected whitespace will cause an HTTP 400 error.
 
 :::
 
-<Tabs>
+<Tabs groupId="languages">
 <TabItem value="py" label="Python">
 
 ```python
