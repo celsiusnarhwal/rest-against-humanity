@@ -9,7 +9,6 @@ app = FastAPI()
 
 @app.get("/api")
 async def get_packs(packs: str = None):
-    file_dir = os.path.dirname(os.path.abspath(__file__))
     cards_json = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "cards.json")))
 
     if packs:
