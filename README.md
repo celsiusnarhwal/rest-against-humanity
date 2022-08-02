@@ -1,3 +1,12 @@
+This branch of the repository contains the old version of REST Against Humanity before its move from
+[DigitalOcean](https://digitalocean.com) to [Vercel](https://vercel.com). The move involved a major refactoring of REST 
+Against Humanity's codebase, so I thought it would be a good idea to make a backup. This is the backup.
+
+There's probably nothing of interest to you here. You should go check out [restagainsthumanity.com](https://restagainsthumanity.com) 
+instead.
+
+Or you can keep reading, I guess. You do you.
+ 
 # REST Against Humanity
 
 REST Against Humanity is a public API for [Cards Against Humanity](https://cardsagainsthumanity.com/).
