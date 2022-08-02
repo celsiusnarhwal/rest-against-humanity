@@ -7,7 +7,7 @@ sidebar_position: 2
 
 ## Summary
 
-REST Against Humanity is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License
+REST Against Humanity is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 (CC BY-NC-SA 4.0, for short). In summary, this means you can do whatever you want with REST Against Humanity
 on the conditions that:
 
