@@ -39,6 +39,9 @@ const config = {
     themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
         ({
+            colorMode: {
+                respectPrefersColorScheme: true,
+            },
             navbar: {
                 title: 'REST Against Humanity',
                 items: [
