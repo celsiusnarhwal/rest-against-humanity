@@ -17,6 +17,10 @@ const config = {
         locales: ['en'],
     },
 
+    stylesheets: [
+        'https://cdnjs.cloudflare.com/ajax/libs/cc-icons/1.2.1/css/cc-icons.min.css'
+    ],
+
     presets: [
         [
             'classic',
@@ -47,9 +51,17 @@ const config = {
             },
             footer: {
                 style: 'dark',
-                copyright: `<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />The contents of this site are licensed under a <a rel="license" href="/docs/license">Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.
-                            <br><br>
-                            REST Against Humanity © ${new Date().getFullYear()} celsius narhwal. REST Against Humanity is not affiliated with or endorsed by Cards Against Humanity, LLC.`,
+                copyright: `<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" style="text-decoration: none">` +
+                    `<i class="cc cc-cc" style="color: white; font-size: 25px"></i> ` +
+                    `<i class="cc cc-by" style="color: white; font-size: 25px"></i> ` +
+                    `<i class="cc cc-nc" style="color: white; font-size: 25px"></i> ` +
+                    `<i class="cc cc-sa" style="color: white; font-size: 25px"></i></a>` +
+                    `<br>` +
+                    `The contents of this site are licensed under a <a rel="license" href="/docs/license">` +
+                    `Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License</a>.` +
+                    `<br><br>` +
+                    `REST Against Humanity © ${new Date().getFullYear()} celsius narhwal. ` +
+                    `REST Against Humanity is not affiliated with or endorsed by Cards Against Humanity, LLC.`
             },
             prism: {
                 theme: lightCodeTheme,
