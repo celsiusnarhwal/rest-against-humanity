@@ -8,4 +8,4 @@ REST Against Humanity © celsius narhwal. All rights reserved.
 
 ## License
 
-REST Against Humanity is licensed under the [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://restagainsthumanity.com/docs/license).
+REST Against Humanity is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](https://restagainsthumanity.com/docs/license).
