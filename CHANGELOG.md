@@ -12,8 +12,8 @@ This is the first versioned release of REST Against Humanity.
 
 ### Added
 
-- REST Against Humanity is now a versioned API. Its versioning scheme will adhere to [Semantic Versioning]
-  (https://semver.org/) as closely as possible.
+- REST Against Humanity is now a versioned API. Its versioning scheme will adhere
+  to [Semantic Versioning](https://semver.org/) as closely as possible.
 - Pack names and cards are now served from distinct endpoints.
 - Cards can now be filtered by color and pick.
 - For all additions brought by version 2.0.0, see the [documentation](https://restagainsthumanity.com/docs).
