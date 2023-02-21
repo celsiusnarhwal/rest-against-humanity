@@ -1,15 +1,28 @@
 [tool.poetry]
 name = "rest-against-humanity"
-version = "0.1.0"
-description = ""
+version = "2.0.0"
+description = "A public API for Cards Against Humanity"
 authors = ["celsius narhwal <celsiusnarhwal@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
-fastapi = "^0.78.0"
+fastapi = "^0.92.0"
+ujson = "^5.7.0"
 
-[tool.poetry.dev-dependencies]
-uvicorn = "^0.18.2"
+[tool.poetry.group.dev.dependencies]
+pyperclip = "^1.8.2"
+rich-tracebacks = "^1.2.1"
+uvicorn = "^0.20.0"
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.isort]
+profile = "black"
+
+[tool.poe.tasks]
+export = "poetry export -f requirements.txt -o website/api/requirements.txt --without-hashes"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]

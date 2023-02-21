@@ -11,7 +11,7 @@ import TabItem from "@theme/TabItem";
 REST Against Humanity is a public API for [_Cards Against Humanity_](https://cardsagainsthumanity.com/).
 You can use it to programatically obtain sets of cards from any of _Cards Against Humanity_'s 71 official packs.
 
-You should probably read the [rules of _Cards Against Humanity_](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before
+You should probably learn the [rules of _Cards Against Humanity_](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before
 using this API.
 
 
@@ -27,10 +27,13 @@ Names of _Cards Against Humanity_ packs available through REST Against Humanity.
 
 None.
 
-#### Example Response
+#### Response Schema
 
 ```json
-["CAH Base Set", "2012 Holiday Pack", "2014 Holiday Pack", ...]
+{
+  "type": "array",
+  "items": { "type": "string" }
+}
 ```
 
 #### Code Examples
@@ -145,7 +148,7 @@ _Cards Against Humanity_ cards.
 | packs            | string   | A comma-separated, case-sensitive, list of packs to limit the response to.                                                                                                                  | No            | All packs   |
 | color            | string   | Limit the response to either black or white cards. Must be one of either "black" or "white".                                                                               | No            | N/A         |
 | pick             | integer  | The pick that black cards in the response should be limited to. (A black card's pick is the number of blank spaces it has for white cards to fill.) Must be either 1 or 2. | No            | N/A         |
-| includePackNames | boolean  | Whether to include the name of each card's originating pack in the response.                                                                                               | No            | True        |
+| includePackNames | boolean  | Whether to include the name of each card's originating pack in the response.                                                                                               | No            | False       |
 
 :::danger
 
@@ -167,43 +170,46 @@ Unexpected whitespace will cause an HTTP 400 error.
 
 :::
 
-#### Example Response
+#### Response Schema
 
 ```json
 {
-  "black": [
-    {
-      "text": "_ + _ = Hipsters",
-      "pick": 2,
-      "pack": "CAH Base Set"
+  "type": "object",
+  "properties": {
+    "black": {
+      "title": "Black",
+      "type": "array",
+      "items": { "$ref": "#/definitions/BlackCard" }
     },
-    {
-      "text": "_ is a sure sign of mankind's decline.",
-      "pick": 1,
-      "pack": "CAH Base Set"
-    },
-    {
-      "text": "_ would only happen in my worst nightmares.",
-      "pick": 1,
-      "pack": "CAH Base Set"
+    "white": {
+      "title": "White",
+      "type": "array",
+      "items": { "$ref": "#/definitions/WhiteCard" }
     }
-  ],
-  "white": [
-    {
-      "text": "A balanced breakfast.",
-      "pack": "CAH Base Set"
+  },
+  "required": ["black", "white"],
+  "definitions": {
+    "BlackCard": {
+      "title": "BlackCard",
+      "type": "object",
+      "properties": {
+        "text": { "title": "Text", "type": "string" },
+        "pack": { "title": "Pack", "type": "string" },
+        "pick": { "title": "Pick", "type": "integer" }
+      },
+      "required": ["text", "pack", "pick"]
     },
-    {
-      "text": "A big hoopla about nothing.",
-      "pack": "CAH Base Set"
-    },
-    {
-      "text": "A cat with... hands.",
-      "pack": "CAH Base Set"
+    "WhiteCard": {
+      "title": "WhiteCard",
+      "type": "object",
+      "properties": {
+        "text": { "title": "Text", "type": "string" },
+        "pack": { "title": "Pack", "type": "string" }
+      },
+      "required": ["text", "pack"]
     }
-  ]
+  }
 }
-
 ```
 
 #### Code Examples

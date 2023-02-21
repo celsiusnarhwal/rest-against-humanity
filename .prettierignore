@@ -1,0 +1,3 @@
+website/docs/*.mdx
+website/versioned_docs
+website/versioned_sidebars

@@ -23,3 +23,4 @@ yarn-error.log*
 *.iml
 out
 gen
+.vercel

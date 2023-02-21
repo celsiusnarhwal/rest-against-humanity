@@ -1,43 +1,29 @@
-import json
-import os
-import urllib.parse
-
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
+
+from .v1 import v1
+from .v2 import v2
 
 app = FastAPI()
+app.include_router(v1)
+app.include_router(v2)
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["GET"],
-    allow_headers=["*"]
+    allow_headers=["*"],
 )
 
 
 @app.get("/api")
-async def get_packs(packs: str = None):
-    cards_json = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "cards.json")))
+async def root():
+    return RedirectResponse("/api/v1")
 
-    if packs:
-        packs = urllib.parse.unquote_plus(packs).split(",")
-        if all(p in [pk["name"] for pk in cards_json] for p in packs):
-            selected_packs = [p for p in cards_json if p["name"] in packs]
 
-            black = []
-            white = []
+if __name__ == "__main__":
+    import uvicorn
 
-            for pack in selected_packs:
-                for card in pack["white"]:
-                    white.append(card["text"])
-
-                for card in pack["black"]:
-                    card.pop("pack")
-                    black.append(card)
-
-            return {"white": white, "black": black}
-        else:
-            raise HTTPException(status_code=400, detail="Your request included one or more invalid pack names")
-    else:
-        return [p["name"] for p in cards_json]
+    uvicorn.run(app)

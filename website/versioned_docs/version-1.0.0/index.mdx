@@ -1,0 +1,509 @@
+---
+title: Home
+sidebar_position: 1
+---
+
+import Tabs from "@theme/Tabs";
+import TabItem from "@theme/TabItem";
+
+# REST Against Humanity
+
+REST Against Humanity is a public API for [_Cards Against Humanity_](https://cardsagainsthumanity.com/).
+You can use it to programatically obtain sets of cards from any of _Cards Against Humanity_'s 71 official packs.
+
+## Usage
+
+REST Against Humanity can be accessed at [restagainsthumanity.com/api/v1/](https://restagainsthumanity.com/api/v1).
+
+:::info
+
+The code examples provided here are just that - examples! Just because your preferred language doesn't appear here
+doesn't mean you can't use REST Against Humanity. As long as your language implements HTTP requests and responses -
+or has a third-party library that does - you're good.
+
+:::
+
+### Getting a List of Packs
+
+To obtain a list of all available packs, send a GET request to the root endpoint (`/api/v1`).
+
+<Tabs groupId="languages">
+<TabItem value="py" label="Python">
+
+```python
+import requests
+
+r = requests.get('https://restagainsthumanity.com/api/v1')
+packs = r.json()
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+fetch("https://restagainsthumanity.com/api/v1")
+  .then((response) => response.json())
+  .then((packs) => console.log(packs));
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+import java.io.IOException;
+import java.net.URL;
+import java.util.Scanner;
+
+class Main {
+
+  public static void main(String[] args) throws IOException {
+    URL url = new URL("https://restagainsthumanity.com/api/v1");
+    Scanner scanner = new Scanner(url.openStream());
+    StringBuilder sb = new StringBuilder();
+    while (scanner.hasNext()) {
+      sb.append(scanner.nextLine());
+    }
+    System.out.println(sb);
+  }
+}
+
+```
+
+</TabItem>
+<TabItem value="kotlin" label="Kotlin">
+
+```kotlin
+import kotlin.io.ByteReadChannel
+import kotlin.io.readBytes
+
+fun main() {
+    val url = URL("https://restagainsthumanity.com/api/v1")
+    val channel = ByteReadChannel(url.openStream().readBytes())
+    val string = channel.readUTF8Line()
+    println(string)
+}
+```
+
+</TabItem>
+<TabItem value="swift" label="Swift">
+
+```swift
+import Foundation
+
+let url = URL(string: "https://restagainsthumanity.com/api/v1")
+let data = try String(contentsOf: url)
+
+print(data)
+```
+
+</TabItem>
+<TabItem value="ruby" label="Ruby">
+
+```ruby
+require 'open-uri'
+require 'json'
+
+url = 'https://restagainsthumanity.com/api/v1'
+packs = JSON.parse(open(url).read)
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```go
+import "net/http"
+import "encoding/json"
+
+resp, err := http.Get("https://restagainsthumanity.com/api/v1")
+
+if err != nil {
+    panic(err)
+}
+
+defer resp.Body.Close()
+
+packs := make([]map[string]interface{}, 0)
+json.NewDecoder(resp.Body).Decode(&packs)
+```
+
+</TabItem>
+<TabItem value="shell" label="Shell">
+
+```shell
+curl -s https://restagainsthumanity.com/api/v1
+```
+
+</TabItem>
+</Tabs>
+
+You'll get a list of available packs as the response:
+
+```json
+[
+  "CAH Base Set",
+  "2012 Holiday Pack",
+  "2013 Holiday Pack",
+  "2014 Holiday Pack",
+  "90s Nostalgia Pack",
+  "..."
+]
+```
+
+### Getting Cards
+
+To obtain cards, specify the packs you want using the `packs` parameter.
+
+<Tabs groupId="languages">
+<TabItem value="py" label="Python">
+
+```python
+import requests
+
+url = "https://restagainsthumanity.com/api/v1"
+params = {'packs': 'CAH Base Set'}
+r = requests.get(url, params=params)
+cards = r.json()
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+fetch("https://restagainsthumanity.com/api/v1", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    packs: "CAH Base Set",
+  }),
+})
+  .then((response) => response.json())
+  .then((cards) => console.log(cards));
+```
+
+</TabItem>
+
+<TabItem value="java" label="Java">
+
+```java
+import java.io.IOException;
+import java.net.URL;
+
+class Main {
+
+  public static void main(String[] args) throws IOException {
+    URL url = new URL("https://restagainsthumanity.com/api/v1");
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("packs", "CAH Base Set");
+
+    StringBuilder urlParams = new StringBuilder();
+    for (Map.Entry<String, String> entry : params.entrySet()) {
+      urlParams.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+      urlParams.append("=");
+      urlParams.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+      urlParams.append("&");
+    }
+    url.append("?" + urlParams.toString());
+    Scanner scanner = new Scanner(url.openStream());
+    StringBuilder sb = new StringBuilder();
+    while (scanner.hasNext()) {
+      sb.append(scanner.nextLine());
+    }
+    System.out.println(sb);
+  }
+}
+
+```
+
+</TabItem>
+<TabItem value="kotlin" label="Kotlin">
+
+```kotlin
+import kotlin.io.ByteReadChannel
+import kotlin.io.readBytes
+
+fun main() {
+    val url = URL("https://restagainsthumanity.com/api/v1")
+    val params = mapOf("packs" to "CAH Base Set")
+
+    val urlWithParams = url.newBuilder().apply {
+        for ((key, value) in params) {
+            addQueryParameter(key, value)
+        }
+    }.build()
+
+    val channel = ByteReadChannel(urlWithParams.openStream().readBytes())
+    val string = channel.readUTF8Line()
+    println(string)
+}
+```
+
+</TabItem>
+<TabItem value="swift" label="Swift">
+
+```swift
+import Foundation
+
+let url = URL(string: "https://restagainsthumanity.com/api/v1")
+let params = ["packs": "CAH Base Set"]
+let urlWithParams = url.build()
+
+urlWithParams.query = params.map { "\($0)=\($1)" }.joined(separator: "&")
+
+let data = try String(contentsOf: urlWithParams)
+
+print(data)
+```
+
+</TabItem>
+<TabItem value="ruby" label="Ruby">
+
+```ruby
+require 'open-uri'
+require 'json'
+
+url = 'https://restagainsthumanity.com/api/v1'
+params = {'packs': 'CAH Base Set'}
+r = JSON.parse(open(url, params).read)
+```
+
+</TabItem>
+
+<TabItem value="go" label="Go">
+
+```go
+import "net/http"
+import "encoding/json"
+
+params := map[string]string{"packs": "CAH Base Set"}
+
+resp, err := http.Post("https://restagainsthumanity.com/api/v1", "application/json", strings.NewReader(json.Marshal(params)))
+
+if err != nil {
+    panic(err)
+}
+
+defer resp.Body.Close()
+
+packs := make([]map[string]interface{}, 0)
+json.NewDecoder(resp.Body).Decode(&packs)
+```
+
+</TabItem>
+
+<TabItem value="shell" label="Shell">
+
+```shell
+curl -s https://restagainsthumanity.com/api/v1?packs=CAH+Base+Set
+```
+
+</TabItem>
+</Tabs>
+
+#### Multiple Packs
+
+To get cards from multiple packs, separate the names of your desired packs with commas.
+
+:::danger
+
+It's important that you separate pack names with **commas only** - _not_ commas and spaces.
+
+For example, this is fine:
+
+```
+CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack
+```
+
+But this is not:
+
+```
+CAH Base Set, 2012 Holiday Pack, 90s Nostalgia Pack
+```
+
+Unexpected whitespace will cause an HTTP 400 error.
+
+:::
+
+<Tabs groupId="languages">
+<TabItem value="py" label="Python">
+
+```python
+import requests
+
+url = "https://restagainsthumanity.com/api/v1"
+params = {'packs': 'CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack'}
+r = requests.get(url, params=params)
+cards = r.json()
+```
+
+</TabItem>
+<TabItem value="js" label="JavaScript">
+
+```js
+fetch("https://restagainsthumanity.com/api/v1", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    packs: "CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack",
+  }),
+})
+  .then((response) => response.json())
+  .then((cards) => console.log(cards));
+```
+
+</TabItem>
+<TabItem value="java" label="Java">
+
+```java
+import java.io.IOException;
+import java.net.URL;
+
+class Main {
+
+  public static void main(String[] args) throws IOException {
+    URL url = new URL("https://restagainsthumanity.com/api/v1");
+    HashMap<String, String> params = new HashMap<String, String>();
+    params.put("packs", "CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack");
+
+    StringBuilder urlParams = new StringBuilder();
+    for (Map.Entry<String, String> entry : params.entrySet()) {
+      urlParams.append(URLEncoder.encode(entry.getKey(), "UTF-8"));
+      urlParams.append("=");
+      urlParams.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
+      urlParams.append("&");
+    }
+    url.append("?" + urlParams.toString());
+    Scanner scanner = new Scanner(url.openStream());
+    StringBuilder sb = new StringBuilder();
+    while (scanner.hasNext()) {
+      sb.append(scanner.nextLine());
+    }
+    System.out.println(sb);
+  }
+}
+
+```
+
+</TabItem>
+<TabItem value="kotlin" label="Kotlin">
+
+```kotlin
+import kotlin.io.ByteReadChannel
+import kotlin.io.readBytes
+
+fun main() {
+    val url = URL("https://restagainsthumanity.com/api/v1")
+    val params = mapOf("packs" to "CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack")
+
+    val urlWithParams = url.newBuilder().apply {
+        for ((key, value) in params) {
+            addQueryParameter(key, value)
+        }
+    }.build()
+
+    val channel = ByteReadChannel(urlWithParams.openStream().readBytes())
+    val string = channel.readUTF8Line()
+    println(string)
+}
+```
+
+</TabItem>
+<TabItem value="swift" label="Swift">
+
+```swift
+import Foundation
+
+let url = URL(string: "https://restagainsthumanity.com/api/v1")
+let params = ["packs": "CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack"]
+let urlWithParams = url.build()
+
+urlWithParams.query = params.map { "\($0)=\($1)" }.joined(separator: "&")
+
+let data = try String(contentsOf: urlWithParams)
+
+print(data)
+```
+
+</TabItem>
+<TabItem value="ruby" label="Ruby">
+
+```ruby
+require 'open-uri'
+require 'json'
+
+url = 'https://restagainsthumanity.com/api/v1'
+params = {'packs': 'CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack'}
+r = JSON.parse(open(url, params).read)
+```
+
+</TabItem>
+<TabItem value="go" label="Go">
+
+```go
+import "net/http"
+import "encoding/json"
+
+params := map[string]string{"packs": "CAH Base Set,2012 Holiday Pack,90s Nostalgia Pack"}
+
+resp, err := http.Post("https://restagainsthumanity.com/api/v1", "application/json", strings.NewReader(json.Marshal(params)))
+
+if err != nil {
+    panic(err)
+}
+
+defer resp.Body.Close()
+
+packs := make([]map[string]interface{}, 0)
+json.NewDecoder(resp.Body).Decode(&packs)
+```
+
+</TabItem>
+<TabItem value="shell" label="Shell">
+
+```shell
+curl -s https://restagainsthumanity.com/api/v1?packs=CAH+Base+Set,2012+Holiday+Pack,90s+Nostalgia+Pack
+```
+
+</TabItem>
+</Tabs>
+
+Regardless of how many packs you request, the response will come formatted like this:
+
+```json
+{
+  "white": [
+    "A balanced breakfast.",
+    "A big hoopla about nothing.",
+    "A cat with... hands."
+  ],
+  "black": [
+    {
+      "text": "_ + _ = Hipsters",
+      "pick": 2
+    },
+    {
+      "text": "_ is a sure sign of mankind's decline.",
+      "pick": 1
+    },
+    {
+      "text": "_ would only happen in my worst nightmares.",
+      "pick": 1
+    }
+  ]
+}
+```
+
+`pick` signifies the number of white cards each player must play. It will always be either `1` or `2`.
+
+It may do you well to learn the [rules of _Cards Against Humanity_](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before using this API.
+
+## Acknowledgements
+
+REST Against Humanity © celsius narhwal.
+
+Card data is sourced from [JSON Against Humanity](https://crhallberg.com/cah/).
+
+Writing from _Cards Against Humanity_ © Cards Against Humanity, LLC. Cards Against Humanity is a trademark of Cards Against Humanity, LLC.
