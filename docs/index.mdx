@@ -14,7 +14,6 @@ You can use it to programatically obtain sets of cards from any of _Cards Agains
 You should probably read the [rules of _Cards Against Humanity_](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before
 using this API.
 
-
 ## Endpoints
 
 ### Packs
@@ -142,14 +141,14 @@ _Cards Against Humanity_ cards.
 
 | **Name**         | **Type** | **Description**                                                                                                                                                            | **Required?** | **Default** |
 | ---------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------- |
-| packs            | string   | A comma-separated, case-sensitive, list of packs to limit the response to.                                                                                                                  | No            | All packs   |
+| packs            | string   | A comma-separated, case-sensitive, list of packs to limit the response to.                                                                                                 | No            | All packs   |
 | color            | string   | Limit the response to either black or white cards. Must be one of either "black" or "white".                                                                               | No            | N/A         |
 | pick             | integer  | The pick that black cards in the response should be limited to. (A black card's pick is the number of blank spaces it has for white cards to fill.) Must be either 1 or 2. | No            | N/A         |
 | includePackNames | boolean  | Whether to include the name of each card's originating pack in the response.                                                                                               | No            | True        |
 
 :::danger
 
-It's important that you separate pack names with **commas only** — *not* commas and spaces.
+It's important that you separate pack names with **commas only** — _not_ commas and spaces.
 
 For example, this is fine:
 
@@ -203,7 +202,6 @@ Unexpected whitespace will cause an HTTP 400 error.
     }
   ]
 }
-
 ```
 
 #### Code Examples
@@ -231,15 +229,17 @@ import axios from "axios";
 
 const axios = require("axios");
 
-axios.get("https://restagainsthumanity.com/api/v2/cards", {
+axios
+  .get("https://restagainsthumanity.com/api/v2/cards", {
     params: {
-        packs: "CAH Base Set,CAH: First Expansion"
-    }
-}).then((resp) => {
+      packs: "CAH Base Set,CAH: First Expansion",
+    },
+  })
+  .then((resp) => {
     if (resp.status === 200) {
-        console.log(resp.data);
+      console.log(resp.data);
     }
-});
+  });
 ```
 
 </TabItem>
@@ -310,7 +310,6 @@ end
 
 </TabItem>
 </Tabs>
-
 
 ## Acknowledgements
 
