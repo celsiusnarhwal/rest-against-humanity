@@ -2,13 +2,6 @@ on:
   push:
     branches:
       - material
-    paths:
-      - docs/**
-      - api/**
-      - vercel.json
-      - mkdocs.yml
-      - .github/workflows/push.yml
-      - .github/workflows/deploy.yml
 
 jobs:
   push:
