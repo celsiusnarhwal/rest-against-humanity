@@ -58,8 +58,8 @@ theme:
     text: Roboto
     code: Roboto Mono
   icon:
-    logo: fontawesome/solid/cards-blank
-    favicon: fontawesome/solid/cards-blank
+    logo: cards-blank
+    favicon: cards-blank
     repo: fontawesome/brands/github
     admonition:
       note: fontawesome/solid/notes
