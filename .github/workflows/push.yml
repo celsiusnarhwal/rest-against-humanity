@@ -41,7 +41,7 @@ jobs:
 
       - name: Get Version Number
         id: version
-        run: python ci/version.py
+        run: poetry run python ci/version.py
 
       - name: Prepare for Build
         run: cp -r api vercel.json docs
