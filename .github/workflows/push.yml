@@ -34,7 +34,7 @@ jobs:
 
       - name: Get Version Number
         id: version
-        run: poetry run python ci/version.py
+        run: echo $(poetry run python ci/version.py) >> $GITHUB_OUTPUT
 
       - name: Prepare for Build
         run: cp -r api vercel.json docs
