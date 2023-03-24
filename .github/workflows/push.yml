@@ -1,0 +1,61 @@
+on:
+  push:
+    branches:
+      - material
+    paths:
+      - docs/**
+      - api/**
+      - vercel.json
+      - mkdocs.yml
+      - .github/workflows/publish.yml
+
+jobs:
+  push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9.15
+
+      - name: Install Poetry
+        run: pipx install poetry==1.4.1
+
+      - name: Save Cache
+        uses: actions/cache@v2
+        with:
+          key: ${{ github.ref }}
+          path: .cache
+
+      - name: Install Dependencies
+        run: poetry install --only ci docs && poetry run poe fontawesome
+        env:
+          POETRY_REPOSITORIES_MATERIAL_INSIDERS_URL: https://github.com/squidfunk/mkdocs-material-insiders
+          POETRY_HTTP_BASIC_MATERIAL_INSIDERS_USERNAME: celsiusnarhwal
+          POETRY_HTTP_BASIC_MATERIAL_INSIDERS_PASSWORD: ${{ secrets.MATERIAL_INSIDERS_TOKEN }}
+          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
+
+      - name: Get Version Number
+        id: version
+        shell: python
+        run: |
+          import os
+
+          import tomlkit as toml
+          import semver
+
+          version = toml.load(open("pyproject.toml").read())["tool"]["poetry"]["version"]
+          version = semver.parse_version_info(version)
+            
+            
+          with open(os.getenv("GITHUB_OUTPUT", "w")) as output:
+              output.write(f"DOCS_VERSION={version.major}.{version.major}")
+
+      - name: Prepare for Build
+        run: cp -r api vercel.json docs
+
+      - name: Build
+        run: poetry run mike deploy ${{ steps.version.outputs.DOCS_VERSION }} --branch vercel --push
