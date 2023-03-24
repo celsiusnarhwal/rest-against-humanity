@@ -41,19 +41,7 @@ jobs:
 
       - name: Get Version Number
         id: version
-        shell: python
-        run: |
-          import os
-
-          import tomlkit as toml
-          import semver
-
-          version = toml.load(open("pyproject.toml").read())["tool"]["poetry"]["version"]
-          version = semver.parse_version_info(version)
-            
-            
-          with open(os.getenv("GITHUB_OUTPUT", "w")) as output:
-              output.write(f"DOCS_VERSION={version.major}.{version.major}")
+        run: python ci/version.py
 
       - name: Prepare for Build
         run: cp -r api vercel.json docs
