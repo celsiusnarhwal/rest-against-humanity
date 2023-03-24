@@ -16,6 +16,7 @@ uvicorn = "^0.20.0"
 
 [tool.poetry.group.docs.dependencies]
 cairosvg = "^2.7.0"
+mike = "^1.1.2"
 mkdocs-git-committers-plugin-2 = "^1.1.1"
 pillow = "^9.4.0"
 poethepoet = "^0.19.0"
@@ -29,6 +30,23 @@ target-version = ["py39"]
 profile = "black"
 
 [tool.poe.tasks]
+clear = "rm -rf site .cache"
+docs = { shell = "mkdocs serve" }
+format = { shell = "for hook in black prettier isort; do pre-commit run $hook --all-files; done" }
+
+[tool.poe.tasks.fontawesome]
+shell = """
+npm install --no-save @celsiusnarhwal/fontawesome
+mv node_modules/@celsiusnarhwal/fontawesome/svgs docs/.overrides/.icons/fontawesome
+rm -rf node_modules
+"""
+
+[tool.poe.tasks.build]
+shell = """
+mkdocs build
+cp -r api vercel.json site
+poetry export -f requirements.txt -o site/api/requirements.txt
+"""
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
