@@ -57,6 +57,17 @@ cp -r api vercel.json site
 poetry export -f requirements.txt -o site/api/requirements.txt
 """
 
+[tool.poe.tasks.freeze]
+shell = """
+$branch=$(git branch --show-current)
+mike deploy ${version} --prefix docs --branch vercel
+git checkout vercel
+git restore --source $branch api vercel.json pyproject.toml .gitignore
+git add -A && git commit --no-verify -S -m "freeze ${version}"
+git checkout $branch
+"""
+args = [{ name = "version" }]
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
