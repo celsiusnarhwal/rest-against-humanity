@@ -165,3 +165,6 @@ fontawesome/
 
 # Vercel
 .vercel
+
+# Miscellaneous
+requirements.txt

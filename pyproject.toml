@@ -40,6 +40,7 @@ profile = "black"
 [tool.poe.tasks]
 clear = "rm -rf site .cache"
 docs = { shell = "mkdocs serve" }
+export = "poetry export -f requirements.txt -o api/requirements.txt"
 format = { shell = "for hook in black prettier isort; do pre-commit run $hook --all-files; done" }
 
 [tool.poe.tasks.fontawesome]
