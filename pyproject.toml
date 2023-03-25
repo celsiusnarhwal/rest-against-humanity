@@ -60,9 +60,9 @@ poetry export -f requirements.txt -o site/api/requirements.txt
 [tool.poe.tasks.freeze]
 shell = """
 $branch=$(git branch --show-current)
-mike deploy ${version} --branch vercel
+mike deploy ${version} --prefix docs --branch vercel
 git checkout vercel
-git restore --source $branch api vercel.json pyproject.toml
+git restore --source $branch api/ vercel.json pyproject.toml
 poe export
 git add -A && git commit -S -m "freeze ${version}"
 git checkout $branch
