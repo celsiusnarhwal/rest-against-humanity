@@ -1,4 +1,5 @@
 ---
+description: A public API for Cards Against Humanity
 hide:
   - footer
 ---
