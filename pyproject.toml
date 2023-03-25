@@ -67,6 +67,7 @@ poe export
 git add -A && git commit -S -m "freeze ${version}"
 git checkout $branch
 """
+args = [{ name = "version" }]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
