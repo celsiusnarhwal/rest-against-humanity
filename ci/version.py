@@ -1,5 +1,3 @@
-import os
-
 import semver
 import tomlkit as toml
 
