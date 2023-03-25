@@ -42,7 +42,7 @@ jobs:
         run: echo $(poetry run python ci/version.py) >> $GITHUB_OUTPUT
 
       - name: Prepare for Build
-        run: cp -r api vercel.json docs
+        run: poetry run poe export && cp -r api vercel.json docs
 
       - name: Build
         run: poetry run mike deploy ${{ steps.version.outputs.DOCS_VERSION }} --branch vercel --push
