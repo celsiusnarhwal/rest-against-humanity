@@ -1,11 +1,9 @@
 ---
-title: License
-sidebar_position: 2
+hide:
+  - footer
 ---
 
 # License
-
-## Summary
 
 REST Against Humanity is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License
 (CC BY-NC-SA 4.0, for short). In summary, this means you can do whatever you want with REST Against Humanity
@@ -19,17 +17,15 @@ This license only applies to the source code and documentation for REST Against 
 [restagainsthumanity.com](https://restagainsthumanity.com). It does not apply to data made available through
 REST Against Humanity's API.
 
-:::caution
+!!! warning
 
-Writing from _Cards Against Humanity_, which REST Against Humanity makes available through its API, is subject to its
-own CC BY-NC-SA 4.0 license. Be sure that your usage of REST Against Humanity is in compliance with both its own
-license and _Cards Against Humanity_'s license.
-
-:::
+    Writing from _Cards Against Humanity_, which REST Against Humanity makes available through its API, is subject to its
+    own CC BY-NC-SA 4.0 license. Be sure that your usage of REST Against Humanity is in compliance with both its own
+    license and _Cards Against Humanity_'s license.
 
 The full terms of the license follow. For more information, visit [Creative Commons](https://creativecommons.org/licenses/by-nc-sa/4.0/).
 
-## Full Terms
+## Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License
 
 By exercising the Licensed Rights (defined below), You accept and agree to be bound by the terms and conditions of this Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International Public License ("Public License"). To the extent this Public License may be interpreted as a contract, You are granted the Licensed Rights in consideration of Your acceptance of these terms and conditions, and the Licensor grants You such rights in consideration of benefits the Licensor receives from making the Licensed Material available under these terms and conditions.
 

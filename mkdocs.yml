@@ -1,0 +1,141 @@
+# Metadata
+site_name: REST Against Humanity
+site_url: https://restagainsthumanity.com
+site_author: celsius narhwal
+
+# Repository
+repo_name: celsiusnarhwal/rest-against-humanity
+repo_url: https://github.com/celsiusnarhwal/rest-against-humanity
+
+# Navigation
+nav:
+  - Home: index.md
+  - License: license.md
+
+# Material for MkDocs
+theme:
+  name: material
+  custom_dir: docs/.overrides
+  features:
+    - announce.dismiss
+    - content.code.annotate
+    - content.code.copy
+    - content.code.select
+    - content.tabs.link
+    - content.tooltips
+    - navigation.footer
+    - navigation.indexes
+    - navigation.sections
+    - navigation.top
+    - navigation.tabs
+    - navigation.tracking
+    - navigation.path
+    - search.highlight
+    - search.share
+    - search.suggest
+    - toc.follow
+    - toc.integrate
+  palette:
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      toggle:
+        icon: material/white-balance-sunny
+        name: Step into the light
+
+    - media: "(prefers-color-scheme: light)"
+      scheme: indigo
+      primary: white
+      toggle:
+        icon: material/weather-night
+        name: Embrace the dark
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: fontawesome/solid/cards-blank
+    favicon: fontawesome/solid/cards-blank
+    repo: fontawesome/brands/github
+    admonition:
+      note: fontawesome/solid/notes
+      tip: material/lightbulb-on
+      danger: material/fire
+
+# Plugins
+plugins:
+  - search:
+      separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
+  #  - social:
+  #      cards_color:
+  #        fill: "#1e1f22"
+  #        text: white
+  #      cards_font: Poppins
+  - typeset
+  - git-committers:
+      repository: celsiusnarhwal/3515.games
+      branch: main
+      enabled: !ENV [MKDOCS_GIT_COMMITTERS, false]
+
+# Extensions
+markdown_extensions:
+  - abbr
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem:
+      smart_enable: all
+  - pymdownx.caret
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      options:
+        custom_icons:
+          - docs/.overrides/.icons
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.magiclink:
+      repo_url_shorthand: true
+      user: celsiusnarhwal
+      repo: 3515.games
+  - pymdownx.mark
+  - pymdownx.smartsymbols
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tilde
+
+# Additional Settings
+extra:
+  version:
+    provider: mike
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/celsiusnarhwal
+      name: github.com/celsiusnarhwal
+    - icon: fontawesome/brands/twitter
+      link: https://twitter.com/celsiusnarhwal
+      name: "@celsiusnarhwal"
+    - icon: fontawesome/solid/envelope
+      link: mailto:hello@celsiusnarhwal.dev
+    - icon: celsius
+      link: https://celsiusnarhwal.dev
+      name: celsiusnarhwal.dev
+
+# JavaScript
+extra_javascript:
+  - "https://kit.fontawesome.com/2273b2767b.js"
