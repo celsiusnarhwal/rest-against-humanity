@@ -9,7 +9,7 @@ repo_url: https://github.com/celsiusnarhwal/rest-against-humanity
 
 # Navigation
 nav:
-  - Home: index.md
+  - Docs: index.md
   - License: license.md
 
 # Material for MkDocs
