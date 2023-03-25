@@ -58,8 +58,8 @@ theme:
     text: Roboto
     code: Roboto Mono
   icon:
-    logo: cards-blank
-    favicon: cards-blank
+    logo: fontawesome/solid/cards-blank
+    favicon: fontawesome/solid/cards-blank
     repo: fontawesome/brands/github
     admonition:
       note: fontawesome/solid/notes
@@ -70,11 +70,11 @@ theme:
 plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-  - social:
-      cards_color:
-        fill: "#1e1f22"
-        text: white
-      cards_font: Poppins
+  #  - social:
+  #      cards_color:
+  #        fill: "#1e1f22"
+  #        text: white
+  #      cards_font: Poppins
   - typeset
   - git-committers:
       repository: celsiusnarhwal/3515.games
