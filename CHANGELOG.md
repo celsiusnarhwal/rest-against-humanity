@@ -11,7 +11,7 @@ All notable changes to this project will be documented in this file.
   scheme:
   - The latest version of the documentation is now always accessible at https://restagainsthumanity.com.
   - The documentation for a specific version of REST Against Humanity is now accessible at
-    https://restagainsthumanity.com/docs/version, where `version` is the version of the documentation you wish to
+    https://restagainsthumanity.com/version, where `version` is the version of the documentation you wish to
     access. You can also simply go to https://restagainsthumanity.com and use the dropdown menu to jump to your desired
     version.
 - This release **does not change** the REST Against Humanity API.
