@@ -52,9 +52,9 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
+  favicon: fontawesome/solid/cards-blank
   icon:
     logo: fontawesome/solid/cards-blank
-    favicon: fontawesome/solid/cards-blank
     repo: fontawesome/brands/github
     admonition:
       note: fontawesome/solid/notes
@@ -71,10 +71,6 @@ plugins:
   #        text: white
   #      cards_font: Poppins
   - typeset
-  - git-committers:
-      repository: celsiusnarhwal/3515.games
-      branch: main
-      enabled: !ENV [MKDOCS_GIT_COMMITTERS, false]
 
 # Extensions
 markdown_extensions:
