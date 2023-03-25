@@ -67,6 +67,7 @@ git add -A && git commit --no-verify -S -m "freeze ${version}"
 git checkout "$branch"
 """
 args = [{ name = "version" }]
+shell = "zsh"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
