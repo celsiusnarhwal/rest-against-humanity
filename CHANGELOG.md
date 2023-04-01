@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - REST Against Humanity's documentation has moved from [Docusaurus](https://docusaurus.io) to [Material for
-  Mkdocs](https://squidfunk.github.io/mkdocs-material/). This means there are a few changes to documentation's URL
+  MkDocs](https://squidfunk.github.io/mkdocs-material/). This brings a few changes to the documentation's URL
   scheme:
   - The latest version of the documentation is now always accessible at https://restagainsthumanity.com.
   - The documentation for a specific version of REST Against Humanity is now accessible at
