@@ -23,7 +23,7 @@ jobs:
         run: pipx install poetry==1.4.1
 
       - name: Export requirements.txt
-        run: poetry export -o api/requiremebts.txt
+        run: poetry export -o api/requirements.txt
 
       - name: Deploy to Vercel
         run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ github.ref == 'refs/heads/vercel' && '--prod' || '' }}
