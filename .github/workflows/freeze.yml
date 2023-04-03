@@ -22,15 +22,6 @@ jobs:
           fetch-depth: 0
           token: ${{ steps.token.outputs.token }}
 
-      - name: Record Origin Branch
-        run: echo "origin=$(git branch --show-current)" >> origin.txt
-
-      - name: Save Origin Branch
-        uses: actions/upload-artifact@v3
-        with:
-          name: origin
-          path: origin.txt
-
       - name: Set Up Python
         uses: actions/setup-python@v4
         with:
@@ -55,6 +46,15 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email github-actions[bot]@users.noreply.github.com
+
+      - name: Record Origin Branch
+        run: echo "origin=$(git branch --show-current)" >> origin.txt
+
+      - name: Save Origin Branch
+        uses: actions/upload-artifact@v3
+        with:
+          name: origin
+          path: origin.txt
 
       - name: Freeze
         run: poetry run mike deploy ${{ steps.version.outputs.version }} --push --branch ${{ github.ref == 'refs/heads/main' && 'vercel' || 'staging' }}
