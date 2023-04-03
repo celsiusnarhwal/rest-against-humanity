@@ -1,0 +1,32 @@
+on:
+  push:
+    branches:
+      - vercel
+      - staging
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Restore Files
+        run: git restore --source main pyproject.toml poetry.lock vercel.json api
+
+      - name: Install Poetry
+        run: pipx install poetry==1.4.1
+
+      - name: Export requirements.txt
+        run: poetry export -o api/requiremebts.txt
+
+      - name: Deploy to Vercel
+        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ github.ref == 'refs/heads/vercel' && '--prod' || '' }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
