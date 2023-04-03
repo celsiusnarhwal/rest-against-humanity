@@ -42,19 +42,20 @@ jobs:
         id: version
         run: echo "version=$(poetry version | cut -d ' ' -f 2 | cut -d '.' -f 1).0" >> $GITHUB_OUTPUT
 
-      - name: Configure Git
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email github-actions[bot]@users.noreply.github.com
-
-      - name: Set Origin Branch
-        run: echo "origin/$(git branch --show-current)" >> origin.txt
-
-      - name: Set Origin Branch (cont.)
-        uses: actions/upload-artifact@v3
-        with:
-          name: origin
-          path: origin.txt
-
       - name: Freeze
-        run: poetry run mike deploy ${{ steps.version.outputs.version }} --push --branch vercel
+        run: poetry run mike deploy ${{ steps.version.outputs.version }} --branch vercel
+
+      - name: Switch Branch
+        run: git switch vercel
+
+      - name: Restore Files
+        run: git restore --source ${{ github.ref_name }} pyproject.toml poetry.lock vercel.json api
+
+      - name: Export requirements.txt
+        run: poetry export -o api/requirements.txt
+
+      - name: Deploy to Vercel
+        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ github.ref_name == 'main' && '--prod' || '' }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
