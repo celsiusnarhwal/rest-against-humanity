@@ -16,8 +16,16 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Get Origin Branch
+        uses: actions/download-artifact@v3
+        with:
+          name: origin
+
+      - name: Set Origin Branch
+        run: echo "ORIGIN=$(cat origin.txt)" >> $GITHUB_ENV
+
       - name: Restore Files
-        run: git restore --source origin/main pyproject.toml poetry.lock vercel.json api
+        run: git restore --source ${{ env.ORIGIN }} pyproject.toml poetry.lock vercel.json api
 
       - name: Install Poetry
         run: pipx install poetry==1.4.1
@@ -26,7 +34,7 @@ jobs:
         run: poetry export -o api/requirements.txt
 
       - name: Deploy to Vercel
-        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ github.ref == 'refs/heads/vercel' && '--prod' || '' }}
+        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ env.origin == 'origin/main' && '--prod' || '' }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
