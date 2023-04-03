@@ -57,4 +57,4 @@ jobs:
           path: origin.txt
 
       - name: Freeze
-        run: poetry run mike deploy ${{ steps.version.outputs.version }} --push --branch ${{ github.ref == 'refs/heads/main' && 'vercel' || 'staging' }}
+        run: poetry run mike deploy ${{ steps.version.outputs.version }} --push --branch vercel
