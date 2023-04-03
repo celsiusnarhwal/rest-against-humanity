@@ -48,7 +48,7 @@ jobs:
           git config user.email github-actions[bot]@users.noreply.github.com
 
       - name: Record Origin Branch
-        run: echo "origin=$(git branch --show-current)" >> origin.txt
+        run: echo "origin/$(git branch --show-current)" >> origin.txt
 
       - name: Save Origin Branch
         uses: actions/upload-artifact@v3
