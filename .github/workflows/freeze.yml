@@ -4,8 +4,6 @@ on:
       - main
       - dev
 
-  workflow_dispatch:
-
 jobs:
   deploy:
     name: Freeze
