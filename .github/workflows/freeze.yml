@@ -33,7 +33,7 @@ jobs:
 
       - name: Get Major Version
         id: version
-        run: echo "version=$(poetry version | cut -d ' ' -f 2 | cut -d '.' -f 1).0 >> $GITHUB_OUTPUT
+        run: echo "version=$(poetry bump | cut -d ' ' -f 2 | cut -d '.' -f 1).0" >> $GITHUB_OUTPUT
 
       - name: Freeze
         run: mike deploy ${{ steps.version.outputs.version }} --branch staging --push
