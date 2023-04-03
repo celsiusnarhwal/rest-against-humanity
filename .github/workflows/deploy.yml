@@ -17,8 +17,9 @@ jobs:
           fetch-depth: 0
 
       - name: Get Origin Branch
-        uses: actions/download-artifact@v3
+        uses: dawidd6/action-download-artifact@v2
         with:
+          workflow_name: freeze.yml
           name: origin
 
       - name: Set Origin Branch
