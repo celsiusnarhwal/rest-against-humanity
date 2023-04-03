@@ -22,7 +22,7 @@ jobs:
           workflow: freeze.yml
           name: origin
 
-      - name: Set Origin Branch
+      - name: Get Origin Branch (cont.)
         run: echo "ORIGIN=$(cat origin.txt)" >> $GITHUB_ENV
 
       - name: Restore Files
