@@ -26,7 +26,7 @@ jobs:
       - name: Install Dependencies
         run: poetry install --only docs && poetry run poe fontawesome
         env:
-          POETRY_REPOSITORIES_MATERIAL_INSIDERS: https://github.com/squidfunk/mkdocs-material-insiders
+          POETRY_REPOSITORIES_MATERIAL_INSIDERS_URL: https://github.com/squidfunk/mkdocs-material-insiders
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_USERNAME: celsiusnarhwal
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_PASSWORD: ${{ secrets.MATERIAL_INSIDERS_TOKEN }}
           FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
