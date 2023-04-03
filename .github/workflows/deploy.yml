@@ -35,7 +35,7 @@ jobs:
         run: poetry export -o api/requirements.txt
 
       - name: Deploy to Vercel
-        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ env.origin == 'origin/main' && '--prod' || '' }}
+        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN == 'origin/main' && '--prod' || '' }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
