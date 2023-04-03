@@ -2,6 +2,7 @@ on:
   push:
     branches:
       - main
+      - dev
 
   workflow_dispatch:
 
@@ -49,4 +50,4 @@ jobs:
           git config user.email github-actions[bot]@users.noreply.github.com
 
       - name: Freeze
-        run: poetry run mike deploy ${{ steps.version.outputs.version }} --branch staging --push
+        run: poetry run mike deploy ${{ steps.version.outputs.version }} --push --branch ${{ github.ref == 'refs/heads/main' && 'vercel' || 'staging' }}
