@@ -35,5 +35,10 @@ jobs:
         id: version
         run: echo "version=$(poetry version | cut -d ' ' -f 2 | cut -d '.' -f 1).0" >> $GITHUB_OUTPUT
 
+      - name: Configure Git
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+
       - name: Freeze
         run: poetry run mike deploy ${{ steps.version.outputs.version }} --branch staging --push
