@@ -10,10 +10,18 @@ jobs:
     name: Freeze
     runs-on: ubuntu-latest
     steps:
+      - name: Create Token
+        uses: tibdex/github-app-token@v1
+        id: token
+        with:
+          app_id: ${{ secrets.GH_APP_ID }}
+          private_key: ${{ secrets.GH_APP_KEY }}
+
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          token: ${{ steps.token.outputs.token }}
 
       - name: Set Up Python
         uses: actions/setup-python@v4
