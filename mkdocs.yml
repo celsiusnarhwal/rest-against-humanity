@@ -9,8 +9,8 @@ repo_url: https://github.com/celsiusnarhwal/rest-against-humanity
 
 # Navigation
 nav:
-  - Docs: index.md
-  - License: license.md
+  - REST API: index.md
+  - GraphQL API: graphql/index.md
 
 # Material for MkDocs
 theme:
@@ -131,6 +131,10 @@ extra:
     - icon: celsius
       link: https://celsiusnarhwal.dev
       name: celsiusnarhwal.dev
+
+# CSS
+extra_css:
+  - assets/stylesheets/extra.css
 
 # JavaScript
 extra_javascript:

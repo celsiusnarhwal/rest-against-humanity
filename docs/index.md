@@ -1,5 +1,6 @@
 ---
-description: A public API for Cards Against Humanity
+icon: fontawesome/solid/webhook
+description: A public REST API for Cards Against Humanity
 hide:
   - footer
 ---
