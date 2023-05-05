@@ -4,7 +4,7 @@ import ujson as json
 from fastapi import APIRouter
 from fastapi.requests import Request
 
-from .models import *
+from api.v2.models import *
 
 v2 = APIRouter(prefix="/api/v2")
 

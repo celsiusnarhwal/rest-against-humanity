@@ -2,9 +2,9 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import RedirectResponse
 
-from .graphql import graphql
-from .v1 import v1
-from .v2 import v2
+from api.graphql import graphql
+from api.v1 import v1
+from api.v2 import v2
 
 app = FastAPI()
 app.include_router(v1)

@@ -1,1 +1,1 @@
-from .app import graphql
+from api.graphql.app import graphql
