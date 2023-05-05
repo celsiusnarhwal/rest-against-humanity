@@ -19,10 +19,14 @@ packs = [Pack.parse_obj(p) for p in CAH]
 class PackType:
     name: strawberry.auto
     id: strawberry.auto
-    white: list[LazyType["WhiteCardType", __name__]]
-    black: list[LazyType["BlackCardType", __name__]]
+    white: list[LazyType["WhiteCardType", __name__]] = strawberry.field(
+        description="The pack's white cards."
+    )
+    black: list[LazyType["BlackCardType", __name__]] = strawberry.field(
+        description="The pack's black cards."
+    )
 
-    @strawberry.field(description="The pack's black cards.")
+    @strawberry.field
     def black(self, where: Optional[BlackCardInput] = None) -> list[BlackCardType]:
         return [
             c
@@ -32,7 +36,7 @@ class PackType:
             and (where.pick is None or c.pick == where.pick)
         ]
 
-    @strawberry.field(description="The pack's white cards.")
+    @strawberry.field
     def white(self, where: Optional[WhiteCardInput] = None) -> list[WhiteCardType]:
         return [
             c
@@ -66,7 +70,7 @@ class Query:
             p
             for p in packs
             if where is None
-            or (where.name is None or p.name == where.name)
+            or (where.name is None or where.name.casefold() in p.name.casefold())
             and (where.id is None or p.id == where.id)
         ]
 
