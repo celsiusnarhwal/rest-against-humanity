@@ -83,14 +83,14 @@ jobs:
       - name: Set Origin Branch
         run: echo "ORIGIN_BRANCH=${{ needs.build.outputs.origin }}" >> $GITHUB_ENV
 
-      #      - name: Restore Files
-      #        run: git restore --source origin/${{ env.ORIGIN_BRANCH }} .poetry-version pyproject.toml poetry.lock vercel.json api
-      #
-      #      - name: Install Poetry
-      #        run: pipx install poetry==$(cat .poetry-version)
-      #
-      #      - name: Export requirements.txt
-      #        run: poetry export -o api/requirements.txt
+      - name: Restore Files
+        run: git restore --source origin/${{ env.ORIGIN_BRANCH }} .poetry-version pyproject.toml poetry.lock vercel.json api
+
+      - name: Install Poetry
+        run: pipx install poetry==$(cat .poetry-version)
+
+      - name: Export requirements.txt
+        run: poetry export -o api/requirements.txt --without-hashes
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
