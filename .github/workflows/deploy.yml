@@ -92,11 +92,20 @@ jobs:
       - name: Export requirements.txt
         run: poetry export -o api/requirements.txt
 
+      - name: Install Vercel CLI
+        run: npm i -g vercel
+
+      - name: Build for Vercel
+        run: vercel pull --yes && vercel build --yes
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
       - name: Upload Artifact
         uses: actions/upload-artifact@v3
         with:
           name: site
-          path: .
+          path: .vercel/output
 
   deploy:
     name: Deploy to Vercel
@@ -110,11 +119,8 @@ jobs:
           name: site
           path: site
 
-      - name: Build for Vercel
-        run: npx vercel build --cwd site
-
       - name: Deploy to Vercel
-        run: npx vercel --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        run: npx vercel --yes --prebuilt --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
