@@ -128,4 +128,4 @@ jobs:
       #        run: vercel build --yes ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
 
       - name: Deploy to Vercel
-        run: vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        run: vercel --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
