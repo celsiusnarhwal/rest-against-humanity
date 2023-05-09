@@ -1,0 +1,17 @@
+:root {
+  --md-primary-fg-color: #4051b5;
+  --md-primary-fg-color--light: #5d6cc0;
+  --md-primary-fg-color--dark: #303fa1;
+}
+
+.md-typeset .md-button--gql {
+  border-color: #e10098;
+  color: #e10098;
+}
+
+.md-typeset .md-button:focus,
+.md-typeset .md-button:hover {
+  background-color: #e10098;
+  border-color: #e10098;
+  color: #ffffff;
+}
