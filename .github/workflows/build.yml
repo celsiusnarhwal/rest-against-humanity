@@ -58,9 +58,9 @@ jobs:
         run: |
           git config user.name alter-negro[bot]
           git config user.email beepboop@celsiusnarhwal.dev
-          git branch ${{ env.PR_BRANCH }} vercel
+          git branch ${{ env.PR_BRANCH }} origin/vercel
           poetry run poe build --branch ${{ env.PR_BRANCH }} --push
-          gh pr create --head ${{ env.PR_BRANCH }} --base vercel
-          gh pr merge vercel --delete-branch
+          gh pr create --head ${{ env.PR_BRANCH }} --base origin/vercel
+          gh pr merge origin/vercel --delete-branch
         env:
           GH_TOKEN: ${{ steps.nodoka.outputs.token }}
