@@ -12,7 +12,7 @@ jobs:
     name: Deploy
     environment: main
     runs-on: ubuntu-latest
-    if: ${{ github.actor == 'alter-negro' }}
+    if: ${{ github.actor == 'alter-negro[bot]' }}
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
