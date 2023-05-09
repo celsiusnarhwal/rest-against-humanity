@@ -1,19 +1,21 @@
 ---
-icon: simple/graphql
-description: A public GraphQL API for Cards Against Humanity
-hide:
-  - footer
+title: Docs
+description: A public API for Cards Against Humanity
 ---
 
-# GraphQL Against Humanity
+# REST Against Humanity
 
-GraphQL Against Humanity is REST Against Humanity's GraphQL API. You can use it to programatically obtain sets of
+REST Against Humanity is a public API for Cards Against Humanity. You can use it to programatically obtain sets of
 cards from any of _Cards Against Humanity_'s 71 official packs.
 
 You should probably read the [rules of Cards Against Humanity](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before using
 this API.
 
-GraphQL Against Humanity is accessible at `https://restagainsthumanity.com/api/graphql`.
+REST Against Humanity is accessible at `https://restagainsthumanity.com/api/graphql`.
+
+!!! graphql "This is a GraphQL API"
+
+    This version of REST Against Humanity uses GraphQL. You should familiarize yourself with the [GraphQL language](https://graphql.org/learn/) before using it.
 
 ## Introspection
 
@@ -103,3 +105,56 @@ Criteria by which to filter white cards.
 | **Field** | **Type** | **Description**       | **Required?** |
 | --------- | -------- | --------------------- | ------------- |
 | `text`    | `String` | The text of the card. | No            |
+
+## Examples
+
+### Listing all pack names
+
+```graphql
+query {
+  packs {
+    name
+  }
+}
+```
+
+### Listing all packs and cards
+
+```graphql
+query {
+  packs {
+    name
+    black {
+      text
+      pick
+    }
+    white {
+      text
+    }
+  }
+}
+```
+
+### Listing all black cards with a `pick` of 2
+
+```graphql
+query {
+  packs {
+    name
+    black(where: { pick: 2 }) {
+      text
+      pick
+    }
+  }
+}
+```
+
+### Listing all packs with the word "expansion" in their name
+
+```graphql
+query {
+  packs(where: { name: "expansion" }) {
+    name
+  }
+}
+```

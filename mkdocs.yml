@@ -7,11 +7,6 @@ site_author: celsius narhwal
 repo_name: celsiusnarhwal/rest-against-humanity
 repo_url: https://github.com/celsiusnarhwal/rest-against-humanity
 
-# Navigation
-nav:
-  - REST API: index.md
-  - GraphQL API: graphql/index.md
-
 # Material for MkDocs
 theme:
   name: material
@@ -27,7 +22,6 @@ theme:
     - navigation.indexes
     - navigation.sections
     - navigation.top
-    - navigation.tabs
     - navigation.tracking
     - navigation.path
     - search.highlight
@@ -40,14 +34,14 @@ theme:
       scheme: slate
       primary: black
       toggle:
-        icon: material/white-balance-sunny
+        icon: light-mode
         name: Step into the light
 
     - media: "(prefers-color-scheme: light)"
       scheme: indigo
       primary: white
       toggle:
-        icon: material/weather-night
+        icon: dark-mode
         name: Embrace the dark
   font:
     text: Roboto
@@ -65,12 +59,12 @@ theme:
 plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
-  #  - social:
-  #      cards_color:
-  #        fill: "#1e1f22"
-  #        text: white
-  #      cards_font: Poppins
   - typeset
+  - iconoclast:
+      css: true
+  - iconocards
+  - mike:
+      alias_type: copy
 
 # Extensions
 markdown_extensions:
@@ -131,9 +125,11 @@ extra:
     - icon: celsius
       link: https://celsiusnarhwal.dev
       name: celsiusnarhwal.dev
+  generator: false
 
 # CSS
 extra_css:
+  - assets/stylesheets/admonitions.css
   - assets/stylesheets/extra.css
 
 # JavaScript
