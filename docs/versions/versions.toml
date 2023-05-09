@@ -1,0 +1,15 @@
+[v1]
+name = "v1"
+title = "Version 1"
+aliases = ["1.0"]
+
+[v2]
+name = "v2"
+title = "Version 2"
+aliases = ["2.0"]
+
+[graphql]
+name = "graphql"
+title = "GraphQL"
+aliases = ["latest"]
+default = true
