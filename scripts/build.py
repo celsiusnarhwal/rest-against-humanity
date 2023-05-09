@@ -1,9 +1,10 @@
+import re
 import subprocess
 from typing import ClassVar
 
 import tomlkit as toml
 from path import Path
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, Field, parse_obj_as, validator
 from tomlkit import TOMLDocument
 
 
@@ -24,33 +25,35 @@ class Mike(BaseModel):
     branch: str
 
     def deploy(self, version: str, push: bool):
-        cmd = f"mike deploy -b {self.branch} {version}"
+        cmd = ["mike", "deploy", "-b", self.branch, version]
 
         if push:
-            cmd += " --push --force"
+            cmd.extend(["--push", "--force"])
 
         self._execute(cmd, version)
 
     def retitle(self, version: str, title: str):
-        cmd = f"mike retitle -b {self.branch} {version} {title}"
+        cmd = ["mike", "retitle", "-b", self.branch, version, title]
         self._execute(cmd, version)
 
     def alias(self, version: str, alias: str):
-        cmd = f"mike alias -b {self.branch} {version} {alias}"
+        cmd = ["mike", "alias", "-b", self.branch, version, alias]
         self._execute(cmd, version)
 
     def set_default(self, version: str):
-        cmd = f"mike set-default -b {self.branch} {version}"
+        cmd = ["mike", "set-default", "-b", self.branch, version]
         self._execute(cmd, version)
 
     def _execute(self, cmd: str, version: str):
         with self.versions_path / version:
-            subprocess.run(cmd.split())
+            print(f"Executing: {' '.join(cmd)}")
+
+            subprocess.run(cmd + ["--allow-empty"])
 
     @classmethod
     def get_versions(cls) -> TOMLDocument:
         versions = toml.load((cls.versions_path / "versions.toml").open())
-        return [Version.parse_obj(version) for version in versions]
+        return parse_obj_as(list[Version], versions["version"])
 
 
 def build(branch: str, push: bool):
