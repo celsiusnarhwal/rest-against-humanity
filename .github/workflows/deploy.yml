@@ -108,7 +108,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: site
-          path: .
+          path: site
 
       - name: Deploy to Vercel
         run: npx vercel --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
