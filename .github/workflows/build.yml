@@ -53,5 +53,5 @@ jobs:
       - name: Build Documentation
         run: poetry run poe build
         env:
-          GIT_AUTHOR_NAME: github-actions[bot]
-          GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
+          GIT_AUTHOR_NAME: alter-negro
+          GIT_AUTHOR_EMAIL: beepboop@celsiusnarhwal.dev

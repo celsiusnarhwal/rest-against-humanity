@@ -50,6 +50,10 @@ docs = { shell = "mkdocs serve" }
 export = "poetry export -f requirements.txt -o api/requirements.txt"
 format = { shell = "for hook in black prettier isort; do pre-commit run $hook --all-files; done" }
 
+[tool.poe.tasks.build]
+shell = "python docs/.scripts/build.py"
+env = { GIT_AUTHOR_NAME = "${GIT_AUTHOR_NAME}", GIT_AUTHOR_EMAIL = "${GIT_AUTHOR_EMAIL}" }
+
 [build-system]
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
