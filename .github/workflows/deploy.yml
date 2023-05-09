@@ -79,7 +79,7 @@ jobs:
           ref: vercel
 
       - name: Set Origin Branch
-        run: echo "ORIGIN_BRANCH=${{ needs.jobs.build.outputs.origin }}
+        run: echo "ORIGIN_BRANCH=${{ needs.jobs.build.outputs.origin }}" >> $GITHUB_ENV
 
       - name: Restore Files
         run: |
