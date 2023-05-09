@@ -3,7 +3,6 @@ name = "rest-against-humanity"
 version = "2.2.0"
 description = "A public API for Cards Against Humanity"
 authors = ["celsius narhwal <celsiusnarhwal@gmail.com>"]
-packages = [{ include = "plugin" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
@@ -22,17 +21,12 @@ uvicorn = "^0.20.0"
 [tool.poetry.group.docs.dependencies]
 cairosvg = "^2.7.0"
 iconoclast = "^2.0.0"
-mkdocs-monorepo-plugin = "^1.0.4"
 pillow = "^9.4.0"
 poethepoet = "^0.19.0"
 pygments-graphql = "^1.0.0"
 fontawesomepro = { version = "^6.4.0", source = "fontawesome" }
 mike = { git = "https://github.com/jimporter/mike" }
 mkdocs-material = { git = "https://github.com/squidfunk/mkdocs-material-insiders" }
-
-[tool.poetry.group.ci.dependencies]
-semver = "^2.13.0"
-tomlkit = "^0.11.6"
 
 [tool.poetry.group.repl.dependencies]
 ipython = "^8.11.0"
