@@ -31,16 +31,12 @@ jobs:
         run: pipx install poetry==1.4.1
 
       - name: Install Dependencies
-        run: poetry install --only docs && poetry run poe fontawesome
+        run: poetry install --only docs
         env:
           POETRY_REPOSITORIES_MATERIAL_INSIDERS_URL: https://github.com/squidfunk/mkdocs-material-insiders
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_USERNAME: celsiusnarhwal
-          POETRY_HTTP_BASIC_MATERIAL_INSIDERS_PASSWORD: ${{ secrets.MATERIAL_INSIDERS_TOKEN }}
-          FONTAWESOME_NPM_AUTH_TOKEN: ${{ secrets.FONTAWESOME_NPM_AUTH_TOKEN }}
-
-      - name: Get Major Version
-        id: version
-        run: echo "version=$(poetry version | cut -d ' ' -f 2 | cut -d '.' -f 1).0" >> $GITHUB_OUTPUT
+          POETRY_HTTP_BASIC_MATERIAL_INSIDERS_PASSWORD: ${{ secrets.GH_PAT }}
+          FONTAWESOME_PKG_TOKEN: ${{ secrets.FONTAWESOME_PKG_TOKEN }}
 
       - name: Set Origin Branch
         run: echo "origin/$(git branch --show-current)" >> origin.txt
@@ -51,8 +47,8 @@ jobs:
           name: origin
           path: origin.txt
 
-      - name: Freeze
-        run: poetry run mike deploy ${{ steps.version.outputs.version }} --push --branch vercel
+      - name: Build Documentation
+        run: poetry run poe build
         env:
           GIT_AUTHOR_NAME: github-actions[bot]
           GIT_AUTHOR_EMAIL: github-actions[bot]@users.noreply.github.com
