@@ -125,7 +125,7 @@ jobs:
         run: vercel pull --yes --token ${{ secrets.VERCEL_TOKEN }}
 
       - name: Build for Vercel
-        run: vercel build --yes --cwd site ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        run: vercel build --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
 
       - name: Deploy to Vercel
         run: vercel --yes --prebuilt --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
