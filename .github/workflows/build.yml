@@ -34,7 +34,7 @@ jobs:
         run: pipx install poetry==$(cat .poetry-version)
 
       - name: Set Up Cache
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: ~/.cache/pypoetry
           key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
@@ -59,7 +59,6 @@ jobs:
           path: origin.txt
 
       - name: Set PR Branch
-        id: pr
         run: echo "PR_BRANCH=$(echo build/${{ github.ref_name }}/${{ github.sha }})" >> $GITHUB_ENV
 
       - name: Configure Git
@@ -74,7 +73,7 @@ jobs:
 
       - name: Merge Build Branch
         run: |
-          gh pr create --head ${{ env.PR_BRANCH }} --base origin/vercel
+          gh pr create --head ${{ env.PR_BRANCH }} --base origin/vercel --fill
           gh pr merge origin/vercel --delete-branch
         env:
           GH_TOKEN: ${{ steps.nodoka.outputs.token }}
