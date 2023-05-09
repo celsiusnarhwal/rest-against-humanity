@@ -43,8 +43,8 @@ jobs:
 
       - name: Set Origin and PR Branches
         run: |
-          echo "ORIGIN_BRANCH=$(echo ${{ github.ref_name }})" >> $GITHUB_ENV
-          echo "PR_BRANCH=$(echo build/${{ github.ref_name }}/${{ github.sha }})" >> $GITHUB_ENV
+          echo "ORIGIN_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "PR_BRANCH=build/${{ github.ref_name }}/${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
@@ -63,6 +63,9 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
 
+    outputs:
+      origin: ${{ env.ORIGIN_BRANCH }}
+
   merge:
     name: Deploy to Vercel
     environment: main
@@ -74,6 +77,9 @@ jobs:
         with:
           fetch-depth: 0
           ref: vercel
+
+      - name: Set Origin Branch
+        run: echo "ORIGIN_BRANCH=${{ steps.build.outputs.origin }}
 
       - name: Restore Files
         run: |
