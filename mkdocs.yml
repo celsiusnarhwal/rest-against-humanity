@@ -63,8 +63,6 @@ plugins:
   - iconoclast:
       css: true
   - iconocards
-  - mike:
-      alias_type: copy
 
 # Extensions
 markdown_extensions:
