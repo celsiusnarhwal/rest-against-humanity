@@ -101,6 +101,7 @@ jobs:
   deploy:
     name: Deploy to Vercel
     environment: main
+    needs: artifact
     runs-on: ubuntu-latest
     steps:
       - name: Download Artifact
