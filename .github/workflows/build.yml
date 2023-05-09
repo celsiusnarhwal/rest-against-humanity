@@ -11,16 +11,16 @@ jobs:
     steps:
       - name: Create Token
         uses: tibdex/github-app-token@v1
-        id: token
+        id: nodoka
         with:
-          app_id: ${{ secrets.GH_APP_ID }}
-          private_key: ${{ secrets.GH_APP_KEY }}
+          app_id: ${{ secrets.NODOKA_ID }}
+          private_key: ${{ secrets.NODOKA_PASSWORD }}
 
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          token: ${{ steps.token.outputs.token }}
+          token: ${{ steps.nodoka.outputs.token }}
 
       - name: Set Up Python
         uses: actions/setup-python@v4
@@ -31,7 +31,7 @@ jobs:
         run: pipx install poetry==1.4.1
 
       - name: Install Dependencies
-        run: poetry install --only docs
+        run: poetry self add poetry-source-env && poetry install --only docs
         env:
           POETRY_REPOSITORIES_MATERIAL_INSIDERS_URL: https://github.com/squidfunk/mkdocs-material-insiders
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_USERNAME: celsiusnarhwal
