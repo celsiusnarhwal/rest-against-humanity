@@ -50,8 +50,17 @@ jobs:
           name: origin
           path: origin.txt
 
+      - name: Set PR Branch
+        id: pr
+        run: echo "PR_BRANCH=$(echo ${{ github.ref_name }}/${{ github.sha }}/build)" >> $GITHUB_ENV
+
       - name: Build Documentation
         run: |
           git config user.name alter-negro[bot]
           git config user.email beepboop@celsiusnarhwal.dev
-          poetry run poe build --push
+          git branch ${{ env.PR_BRANCH }} vercel
+          poetry run poe build --branch ${{ env.PR_BRANCH }} --push
+          gh pr create --head ${{ env.PR_BRANCH }} --base vercel
+          gh pr merge vercel --delete-branch
+        env:
+          GH_TOKEN: ${{ steps.nodoka.outputs.token }}

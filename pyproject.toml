@@ -53,6 +53,12 @@ format = { shell = "for hook in black prettier isort; do pre-commit run $hook --
 script = "scripts.build:build"
 
 [[tool.poe.tasks.build.args]]
+name = "branch"
+options = ["--branch"]
+type = "string"
+default = "vercel"
+
+[[tool.poe.tasks.build.args]]
 name = "push"
 options = ["--push"]
 type = "boolean"
