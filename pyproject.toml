@@ -51,7 +51,6 @@ format = { shell = "for hook in black prettier isort; do pre-commit run $hook --
 
 [tool.poe.tasks.build]
 script = "scripts.build:build"
-env = { GIT_AUTHOR_NAME = "${GIT_AUTHOR_NAME}", GIT_AUTHOR_EMAIL = "${GIT_AUTHOR_EMAIL}" }
 
 [[tool.poe.tasks.build.args]]
 name = "push"
