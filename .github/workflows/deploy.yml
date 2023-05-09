@@ -29,10 +29,10 @@ jobs:
         run: echo "ORIGIN=$(cat origin.txt)" >> $GITHUB_ENV
 
       - name: Restore Files
-        run: git restore --source ${{ env.ORIGIN }} pyproject.toml poetry.lock vercel.json api
+        run: git restore --source ${{ env.ORIGIN }} .poetry-version pyproject.toml poetry.lock vercel.json api
 
       - name: Install Poetry
-        run: pipx install poetry==1.4.1
+        run: pipx install poetry==$(cat .poetry-version)
 
       - name: Export requirements.txt
         run: poetry export -o api/requirements.txt
