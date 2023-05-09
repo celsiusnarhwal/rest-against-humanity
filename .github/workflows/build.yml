@@ -74,6 +74,6 @@ jobs:
       - name: Merge Build Branch
         run: |
           gh pr create --head ${{ env.PR_BRANCH }} --base vercel --title ${{ env.PR_BRANCH }} --body ""
-          gh pr merge vercel --delete-branch
+          gh pr merge ${{ env.PR_BRANCH }} --delete-branch
         env:
           GH_TOKEN: ${{ steps.nodoka.outputs.token }}
