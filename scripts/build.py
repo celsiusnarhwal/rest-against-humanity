@@ -28,7 +28,7 @@ class Mike(BaseModel):
         cmd = ["mike", "deploy", "-b", self.branch, version]
 
         if push:
-            cmd.extend(["--push", "--force"])
+            cmd.extend(["--push"])
 
         self._execute(cmd, version)
 

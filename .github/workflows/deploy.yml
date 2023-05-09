@@ -44,7 +44,7 @@ jobs:
       - name: Set Origin and PR Branches
         run: |
           echo "ORIGIN_BRANCH=$(echo ${{ github.ref_name }})" >> $GITHUB_ENV
-          echo "PR_BRANCH=$(echo build/${{ github.ref_name }})" >> $GITHUB_ENV
+          echo "PR_BRANCH=$(echo build/${{ github.ref_name }}/${{ github.sha }})" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
@@ -53,7 +53,7 @@ jobs:
 
       - name: Create Build Branch
         run: |
-          git branch ${{ env.PR_BRANCH }} origin/vercel --force
+          git branch ${{ env.PR_BRANCH }} origin/vercel
           poetry run poe build --branch ${{ env.PR_BRANCH }} --push
 
       - name: Merge Build Branch
