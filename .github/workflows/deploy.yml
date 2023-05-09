@@ -2,7 +2,6 @@ on:
   push:
     branches:
       - vercel
-      - staging
 
   workflow_dispatch:
 
@@ -19,7 +18,7 @@ jobs:
       - name: Get Origin Branch
         uses: dawidd6/action-download-artifact@v2
         with:
-          workflow: freeze.yml
+          workflow: build.yml
           name: origin
 
       - name: Get Origin Branch (cont.)
