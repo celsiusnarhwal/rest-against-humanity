@@ -68,8 +68,8 @@ jobs:
     outputs:
       origin: ${{ env.ORIGIN_BRANCH }}
 
-  merge:
-    name: Deploy to Vercel
+  artifact:
+    name: Prepare Artifact
     environment: main
     needs: build
     runs-on: ubuntu-latest
@@ -92,8 +92,25 @@ jobs:
       - name: Export requirements.txt
         run: poetry export -o api/requirements.txt
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: .
+
+  deploy:
+    name: Deploy to Vercel
+    environment: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: site
+          path: .
+
       - name: Deploy to Vercel
-        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        run: npx vercel --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
