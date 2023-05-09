@@ -12,6 +12,8 @@
   {
     "version": "v1",
     "title": "Version 1",
-    "aliases": []
+    "aliases": [
+      "1.0"
+    ]
   }
 ]
