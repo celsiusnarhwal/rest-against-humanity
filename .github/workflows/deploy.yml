@@ -1,3 +1,5 @@
+name: Deploy
+
 on:
   push:
     branches:
@@ -8,6 +10,7 @@ on:
 jobs:
   deploy:
     name: Deploy
+    environment: main
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
