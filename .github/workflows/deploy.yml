@@ -82,13 +82,7 @@ jobs:
         run: echo "ORIGIN_BRANCH=${{ needs.build.outputs.origin }}" >> $GITHUB_ENV
 
       - name: Restore Files
-        run: |
-          git restore --source origin/${{ env.ORIGIN_BRANCH }} gitrestore.txt
-          readarray -t files < gitrestore.txt
-
-          for file in "${files[@]}"; do
-            git restore --source origin/${{ env.ORIGIN_BRANCH }} "$line";
-          done
+        run: git restore --source origin/${{ env.ORIGIN_BRANCH }} .poetry-version pyproject.toml poetry.lock vercel.json api
 
       - name: Install Poetry
         run: pipx install poetry==$(cat .poetry-version)
