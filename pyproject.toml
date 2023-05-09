@@ -42,9 +42,6 @@ name = "fontawesome"
 url = "https://dl.fontawesome.com/${FONTAWESOME_PKG_TOKEN}/fontawesome-pro/python/simple"
 secondary = true
 
-[tool.poetry.plugins."mkdocs.plugins"]
-nav = "plugin.plugin:NavPlugin"
-
 [tool.black]
 line-length = 88
 target-version = ["py39"]
