@@ -28,22 +28,12 @@ class PackType:
 
     @strawberry.field
     def black(self, where: Optional[BlackCardInput] = None) -> list[BlackCardType]:
-        return [
-            c
-            for c in self.black
-            if where is None
-            or (where.text is None or where.text in c.text)
-            and (where.pick is None or c.pick == where.pick)
-        ]
+        return [c for c in self.black if (where or BlackCardInput()).matches(c)]
 
     @strawberry.field
     def white(self, where: Optional[WhiteCardInput] = None) -> list[WhiteCardType]:
-        return [
-            c
-            for c in self.white
-            if where is None
-            or (where.text is None or where.text.casefold() in c.text.casefold())
-        ]
+        where = where or WhiteCardInput()
+        return [c for c in self.white if (where or WhiteCardInput()).matches(c)]
 
 
 @strawberry.experimental.pydantic.type(
@@ -66,13 +56,7 @@ class WhiteCardType:
 class Query:
     @strawberry.field(description="A list of packs.")
     def packs(self, where: Optional[PackInput] = None) -> list[PackType]:
-        return [
-            p
-            for p in packs
-            if where is None
-            or (where.name is None or where.name.casefold() in p.name.casefold())
-            and (where.id is None or p.id == where.id)
-        ]
+        return [p for p in packs if (where or PackInput()).matches(p)]
 
 
 schema = strawberry.Schema(Query)
