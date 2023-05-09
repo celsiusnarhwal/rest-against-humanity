@@ -33,6 +33,14 @@ jobs:
       - name: Install Poetry
         run: pipx install poetry==$(cat .poetry-version)
 
+      - name: Set Up Cache
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
       - name: Install Dependencies
         run: poetry self add poetry-source-env && poetry install --only docs
         env:
@@ -52,14 +60,20 @@ jobs:
 
       - name: Set PR Branch
         id: pr
-        run: echo "PR_BRANCH=$(echo ${{ github.ref_name }}/${{ github.sha }}/build)" >> $GITHUB_ENV
+        run: echo "PR_BRANCH=$(echo build/${{ github.ref_name }}/${{ github.sha }})" >> $GITHUB_ENV
 
-      - name: Build Documentation
+      - name: Configure Git
         run: |
           git config user.name alter-negro[bot]
           git config user.email beepboop@celsiusnarhwal.dev
+
+      - name: Create Build Branch
+        run: |
           git branch ${{ env.PR_BRANCH }} origin/vercel
           poetry run poe build --branch ${{ env.PR_BRANCH }} --push
+
+      - name: Merge Build Branch
+        run: |
           gh pr create --head ${{ env.PR_BRANCH }} --base origin/vercel
           gh pr merge origin/vercel --delete-branch
         env:
