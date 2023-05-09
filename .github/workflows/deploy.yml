@@ -86,8 +86,8 @@ jobs:
           git restore --source origin/${{ env.ORIGIN_BRANCH }} .gitrestore
           readarray -t files < .gitrestore
 
-          for file in "${files[@]}" do
-            git restore --source origin/${{ env.ORIGIN_BRANCH }} "$line"
+          for file in "${files[@]}"; do
+            git restore --source origin/${{ env.ORIGIN_BRANCH }} "$line";
           done
 
       - name: Install Poetry
