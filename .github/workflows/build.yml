@@ -52,6 +52,6 @@ jobs:
 
       - name: Build Documentation
         run: |
-          git config user.name alter-negro
+          git config user.name alter-negro[bot]
           git config user.email beepboop@celsiusnarhwal.dev
           poetry run poe build --push
