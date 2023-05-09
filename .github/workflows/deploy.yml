@@ -86,11 +86,6 @@ jobs:
       - name: Restore Files
         run: git restore --source origin/${{ env.ORIGIN_BRANCH }} .poetry-version pyproject.toml poetry.lock vercel.json api
 
-      - name: Set Up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9.15
-
       - name: Install Poetry
         run: pipx install poetry==$(cat .poetry-version)
 
@@ -117,6 +112,11 @@ jobs:
         with:
           name: site
           path: site
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9.15
 
       - name: Install Vercel CLI
         run: npm i -g vercel
