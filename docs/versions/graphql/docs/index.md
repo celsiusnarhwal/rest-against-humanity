@@ -30,9 +30,9 @@ GraphiQL.
 
 List _Cards Against Humanity_ packs.
 
-| **Argument** | **Type**                   | **Description**                                 | **Required?** |
-| ------------ | -------------------------- | ----------------------------------------------- | ------------- |
-| `where`      | [`PackInput!`](#packinput) | Criteria by which to filter the packs returned. | No            |
+| **Argument** | **Type**                    | **Description**                                 | **Required?** |
+| ------------ | --------------------------- | ----------------------------------------------- | ------------- |
+| `where`      | [`PackFilter!`](#packinput) | Criteria by which to filter the packs returned. | No            |
 
 ## Objects
 
@@ -49,15 +49,15 @@ A _Cards Against Humanity_ pack.
 
 For the `black` field:
 
-| **Argument** | **Type**                             | **Description**                                 | **Required?** |
-| ------------ | ------------------------------------ | ----------------------------------------------- | ------------- |
-| `where`      | [`BlackCardInput!`](#blackcardinput) | Criteria by which to filter the cards returned. | No            |
+| **Argument** | **Type**                              | **Description**                                 | **Required?** |
+| ------------ | ------------------------------------- | ----------------------------------------------- | ------------- |
+| `where`      | [`BlackCardFilter!`](#blackcardinput) | Criteria by which to filter the cards returned. | No            |
 
 For the `white` field:
 
-| **Argument** | **Type**                             | **Description**                                 | **Required?** |
-| ------------ | ------------------------------------ | ----------------------------------------------- | ------------- |
-| `where`      | [`WhiteCardInput!`](#whitecardinput) | Criteria by which to filter the cards returned. | No            |
+| **Argument** | **Type**                              | **Description**                                 | **Required?** |
+| ------------ | ------------------------------------- | ----------------------------------------------- | ------------- |
+| `where`      | [`WhiteCardFilter!`](#whitecardinput) | Criteria by which to filter the cards returned. | No            |
 
 ### BlackCardType
 
@@ -80,7 +80,7 @@ A _Cards Against Humanity_ white card.
 
 ## Inputs
 
-### PackInput
+### PackFilter
 
 Criteria by which to filter packs.
 
@@ -89,7 +89,7 @@ Criteria by which to filter packs.
 | `name`    | `String` | The name of the pack. | No            |
 | `id`      | `Int`    | The ID of the pack.   | No            |
 
-### BlackCardInput
+### BlackCardFilter
 
 Criteria by which to filter black cards.
 
@@ -98,7 +98,7 @@ Criteria by which to filter black cards.
 | `text`    | `String` | The text of the card.                    | No            |
 | `pick`    | `Int`    | The number of blank spaces the card has. | No            |
 
-### WhiteCardInput
+### WhiteCardFilter
 
 Criteria by which to filter white cards.
 

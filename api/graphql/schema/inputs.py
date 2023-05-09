@@ -4,11 +4,11 @@ import strawberry
 
 from api.graphql.models import BlackCard, Pack, WhiteCard
 
-__all__ = ["PackInput", "BlackCardInput", "WhiteCardInput"]
+__all__ = ["PackFilter", "BlackCardFilter", "WhiteCardFilter"]
 
 
 @strawberry.input
-class BlackCardInput:
+class BlackCardFilter:
     text: Optional[str] = None
     pick: Optional[int] = None
 
@@ -25,7 +25,7 @@ class BlackCardInput:
 
 
 @strawberry.input
-class WhiteCardInput:
+class WhiteCardFilter:
     text: Optional[str] = None
 
     def matches(self, card: WhiteCard) -> bool:
@@ -38,7 +38,7 @@ class WhiteCardInput:
 
 
 @strawberry.input
-class PackInput:
+class PackFilter:
     name: Optional[str] = None
     id: Optional[int] = None
 
