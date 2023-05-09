@@ -31,7 +31,7 @@ jobs:
           python-version: 3.9.15
 
       - name: Install Poetry
-        run: pipx install poetry==1.4.1
+        run: pipx install poetry==$(cat .poetry-version)
 
       - name: Install Dependencies
         run: poetry self add poetry-source-env && poetry install --only docs
