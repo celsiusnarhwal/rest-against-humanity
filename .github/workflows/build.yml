@@ -51,7 +51,7 @@ jobs:
           path: origin.txt
 
       - name: Build Documentation
-        run: poetry run poe build
+        run: poetry run poe build --push
         env:
           GIT_AUTHOR_NAME: alter-negro
           GIT_AUTHOR_EMAIL: beepboop@celsiusnarhwal.dev
