@@ -50,36 +50,32 @@ jobs:
 
       - name: Configure Git
         run: |
-          git config user.name alter-negro[bot]
-          git config user.email beepboop@celsiusnarhwal.dev
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
 
       - name: Create Build Branch
         run: |
-          git branch origin/vercel || :
-          git branch ${{ env.PR_BRANCH }} origin/vercel
-          poetry run poe build --branch ${{ env.PR_BRANCH }} --push
-
-      - name: Merge Build Branch
-        run: |
-          gh pr create --head ${{ env.PR_BRANCH }} --base vercel --title ${{ env.PR_BRANCH }} --body ""
-          gh pr merge ${{ env.PR_BRANCH }} --merge --delete-branch
-        env:
-          GH_TOKEN: ${{ github.token }}
+          echo "BUILD_BRANCH=tmp/${{ github.sha }}" >> $GITHUB_ENV
+          poetry run poe build --branch ${{ env.BUILD_BRANCH }} --push
 
     outputs:
       origin: ${{ env.ORIGIN_BRANCH }}
+      build: ${{ env.BUILD_BRANCH }}
 
-  artifact:
-    name: Prepare Artifact
+  deploy:
+    name: Deploy Documentation
     environment: main
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Set Build Branch
+        run: echo "BUILD_BRANCH=${{ needs.build.outputs.build }}" >> $GITHUB_ENV
+
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
-          ref: vercel
+          ref: ${{ env.BUILD_BRANCH }}
 
       - name: Set Origin Branch
         run: echo "ORIGIN_BRANCH=${{ needs.build.outputs.origin }}" >> $GITHUB_ENV
@@ -91,42 +87,41 @@ jobs:
         run: pipx install poetry==$(cat .poetry-version)
 
       - name: Export requirements.txt
-        run: poetry export -o api/requirements.txt --without-hashes
-
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: site
-          path: .
-
-  deploy:
-    name: Deploy to Vercel
-    environment: main
-    env:
-      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-    needs: artifact
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download Artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: site
-          path: site
-
-      - name: Set Up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: 3.9.15
-
-      - name: Install Vercel CLI
-        run: npm i -g vercel
-
-      #      - name: Pull Project Settings
-      #        run: vercel pull --yes --token ${{ secrets.VERCEL_TOKEN }}
-      #
-      #      - name: Build for Vercel
-      #        run: vercel build --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        run: poetry export -o api/requirements.txt
 
       - name: Deploy to Vercel
-        run: vercel --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --yes ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+#  deploy:
+#    name: Deploy to Vercel
+#    environment: main
+#    env:
+#      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+#      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+#    needs: artifact
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Download Artifact
+#        uses: actions/download-artifact@v3
+#        with:
+#          name: site
+#          path: site
+#
+#      - name: Set Up Python
+#        uses: actions/setup-python@v4
+#        with:
+#          python-version: 3.9.15
+#
+#      - name: Install Vercel CLI
+#        run: npm i -g vercel
+#
+#      #      - name: Pull Project Settings
+#      #        run: vercel pull --yes --token ${{ secrets.VERCEL_TOKEN }}
+#      #
+#      #      - name: Build for Vercel
+#      #        run: vercel build --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+#
+#      - name: Deploy to Vercel
+#        run: vercel --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
