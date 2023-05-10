@@ -40,10 +40,10 @@ jobs:
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_PASSWORD: ${{ secrets.GH_PAT }}
           FONTAWESOME_PKG_TOKEN: ${{ secrets.FONTAWESOME_PKG_TOKEN }}
 
-      - name: Set Origin and PR Branches
+      - name: Set Origin and Build Branches
         run: |
           echo "ORIGIN_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
-          echo "PR_BRANCH=build/${{ github.ref_name }}/${{ github.sha }}" >> $GITHUB_ENV
+          echo "BUILD_BRANCH=tmp/${{ github.sha }}" >> $GITHUB_ENV
 
       - name: Configure Git
         run: |
@@ -51,10 +51,6 @@ jobs:
           git config user.email github-actions[bot]@users.noreply.github.com
 
       - name: Create Build Branch
-        run: |
-          echo "BUILD_BRANCH=tmp/${{ github.sha }}" >> $GITHUB_ENV
-
-      - name: Populate Build Branch
         run: poetry run poe build --branch ${{ env.BUILD_BRANCH }} --push
 
     outputs:
@@ -96,34 +92,3 @@ jobs:
 
       - name: Delete Build Branch
         run: git push origin --delete ${{ env.BUILD_BRANCH }}
-#  deploy:
-#    name: Deploy to Vercel
-#    environment: main
-#    env:
-#      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-#      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
-#    needs: artifact
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Download Artifact
-#        uses: actions/download-artifact@v3
-#        with:
-#          name: site
-#          path: site
-#
-#      - name: Set Up Python
-#        uses: actions/setup-python@v4
-#        with:
-#          python-version: 3.9.15
-#
-#      - name: Install Vercel CLI
-#        run: npm i -g vercel
-#
-#      #      - name: Pull Project Settings
-#      #        run: vercel pull --yes --token ${{ secrets.VERCEL_TOKEN }}
-#      #
-#      #      - name: Build for Vercel
-#      #        run: vercel build --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
-#
-#      - name: Deploy to Vercel
-#        run: vercel --yes --cwd site --token ${{ secrets.VERCEL_TOKEN }} ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
