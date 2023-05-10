@@ -55,7 +55,6 @@ jobs:
 
       - name: Create Build Branch
         run: |
-          git branch origin/vercel || :
           git branch ${{ env.PR_BRANCH }} origin/vercel
           poetry run poe build --branch ${{ env.PR_BRANCH }} --push
 
