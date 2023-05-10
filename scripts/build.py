@@ -1,4 +1,3 @@
-import re
 import subprocess
 from typing import ClassVar
 
@@ -23,13 +22,10 @@ class Version(BaseModel):
 class Mike(BaseModel):
     versions_path: ClassVar[Path] = Path.getcwd() / "docs" / "versions"
     branch: str
+    push: bool
 
-    def deploy(self, version: str, push: bool):
+    def deploy(self, version: str):
         cmd = ["mike", "deploy", "-b", self.branch, version]
-
-        if push:
-            cmd.extend(["--push"])
-
         self._execute(cmd, version)
 
     def retitle(self, version: str, title: str):
@@ -44,8 +40,11 @@ class Mike(BaseModel):
         cmd = ["mike", "set-default", "-b", self.branch, version]
         self._execute(cmd, version)
 
-    def _execute(self, cmd: str, version: str):
+    def _execute(self, cmd: list, version: str):
         with self.versions_path / version:
+            if self.push:
+                cmd.append("--push")
+
             print(f"Executing: {' '.join(cmd)}")
 
             subprocess.run(cmd + ["--allow-empty"])
@@ -57,10 +56,10 @@ class Mike(BaseModel):
 
 
 def build(branch: str, push: bool):
-    mike = Mike(branch=branch)
+    mike = Mike(branch=branch, push=push)
 
     for version in mike.get_versions():
-        mike.deploy(version.name, push)
+        mike.deploy(version.name)
 
         if version.title:
             mike.retitle(version.name, version.title)
