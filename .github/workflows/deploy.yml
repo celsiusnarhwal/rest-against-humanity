@@ -93,6 +93,9 @@ jobs:
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+      - name: Delete Build Branch
+        run: git push origin --delete ${{ env.BUILD_BRANCH }}
 #  deploy:
 #    name: Deploy to Vercel
 #    environment: main
