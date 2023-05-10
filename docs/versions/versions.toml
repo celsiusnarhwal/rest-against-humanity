@@ -1,15 +1,14 @@
 [[version]]
-name = "1.0"
+name = "1.x"
 title = "Version 1"
+aliases = ["1.0"]
 
-#aliases = ["1.0"]
 [[version]]
-name = "2.0"
+name = "2.x"
 title = "Version 2"
+aliases = ["2.0"]
 
-#aliases = ["2.0"]
 [[version]]
 name = "gql"
 title = "GraphQL"
-#aliases = ["latest"]
-default = true
+aliases = ["latest"]
