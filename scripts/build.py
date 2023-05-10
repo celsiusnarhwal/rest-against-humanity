@@ -68,4 +68,5 @@ def build(branch: str, push: bool):
         for alias in version.aliases:
             mike.alias(version.name, alias)
 
-        mike.set_default("latest")
+        if version.default:
+            mike.set_default(version.name)

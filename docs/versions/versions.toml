@@ -12,3 +12,4 @@ aliases = ["2.0"]
 name = "gql"
 title = "GraphQL"
 aliases = ["latest"]
+default = true
