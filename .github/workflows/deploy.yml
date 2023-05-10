@@ -53,7 +53,9 @@ jobs:
       - name: Create Build Branch
         run: |
           echo "BUILD_BRANCH=tmp/${{ github.sha }}" >> $GITHUB_ENV
-          poetry run poe build --branch ${{ env.BUILD_BRANCH }} --push
+
+      - name: Populate Build Branch
+        run: poetry run poe build --branch ${{ env.BUILD_BRANCH }} --push
 
     outputs:
       origin: ${{ env.ORIGIN_BRANCH }}
