@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-poetry-
 
       - name: Install Dependencies
-        run: poetry self add poetry-source-env && poetry install --only docs && icl install
+        run: poetry self add poetry-source-env && poetry install --only docs && poetry run icl install
         env:
           POETRY_REPOSITORIES_MATERIAL_INSIDERS_URL: https://github.com/squidfunk/mkdocs-material-insiders
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_USERNAME: celsiusnarhwal
