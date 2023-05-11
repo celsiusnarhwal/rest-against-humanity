@@ -39,6 +39,7 @@ jobs:
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_USERNAME: celsiusnarhwal
           POETRY_HTTP_BASIC_MATERIAL_INSIDERS_PASSWORD: ${{ secrets.GH_PAT }}
           FONTAWESOME_PKG_TOKEN: ${{ secrets.FONTAWESOME_PKG_TOKEN }}
+          FONTAWESOME_API_TOKEN: ${{ secrets.FONTAWESOME_API_TOKEN }}
 
       - name: Set Origin and Build Branches
         run: |
