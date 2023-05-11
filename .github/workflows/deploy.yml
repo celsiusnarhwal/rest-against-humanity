@@ -75,7 +75,13 @@ jobs:
           ref: ${{ env.BUILD_BRANCH }}
 
       - name: Restore Files
-        run: git restore --source origin/${{ env.ORIGIN_BRANCH }} .poetry-version pyproject.toml poetry.lock vercel.json api
+        run: |
+          git restore --source ${{ env.ORIGIN_BRANCH }} .gitrestore
+          readarray -t files < .gitrestore
+
+          for file in "${files[@]}"; do
+            git restore --source ${{ env.ORIGIN_BRANCH }} $file
+          done
 
       - name: Install Poetry
         run: pipx install poetry==$(cat .poetry-version)
