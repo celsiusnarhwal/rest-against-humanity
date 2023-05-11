@@ -60,11 +60,11 @@ plugins:
   - search:
       separator: '[\s\-,:!=\[\]()"`/]+|\.(?!\d)|&[lg]t;|(?!\b)(?=[A-Z][a-z])'
   - typeset
+  - social
   - iconoclast:
       css: true
       kit:
         name: General
-  - iconocards
 
 # Extensions
 markdown_extensions:
@@ -131,7 +131,3 @@ extra:
 extra_css:
   - assets/stylesheets/admonitions.css
   - assets/stylesheets/extra.css
-
-# JavaScript
-extra_javascript:
-  - "https://kit.fontawesome.com/2273b2767b.js"

@@ -12,6 +12,7 @@ ujson = "^5.7.0"
 strawberry-graphql = { extras = ["fastapi"], version = "0.176.3" }
 
 [tool.poetry.group.dev.dependencies]
+doppler-env = "^0.3.1"
 poethepoet = "^0.19.0"
 pyperclip = "^1.8.2"
 rich-tracebacks = "^1.2.1"
