@@ -58,7 +58,6 @@ jobs:
         run: poetry run poe build --branch ${{ env.BUILD_BRANCH }} --push
         env:
           FONTAWESOME_API_TOKEN: ${{ secrets.FONTAWESOME_API_TOKEN }}
-
     outputs:
       origin: ${{ env.ORIGIN_BRANCH }}
       build: ${{ env.BUILD_BRANCH }}
