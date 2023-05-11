@@ -77,7 +77,7 @@ jobs:
 
       - name: Restore Files
         run: |
-          git restore --source ${{ env.ORIGIN_BRANCH }} .gitrestore
+          git restore --source origin/${{ env.ORIGIN_BRANCH }} .gitrestore
           readarray -t files < .gitrestore
 
           for file in "${files[@]}"; do
