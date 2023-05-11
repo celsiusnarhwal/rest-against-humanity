@@ -21,7 +21,6 @@ uvicorn = "^0.20.0"
 [tool.poetry.group.docs.dependencies]
 cairosvg = "^2.7.0"
 iconoclast = "^2.0.1"
-mike = "^1.1.2"
 path = "^16.6.0"
 pillow = "^9.4.0"
 poethepoet = "^0.19.0"
@@ -29,6 +28,7 @@ pydantic = "^1.10.7"
 pygments-graphql = "^1.0.0"
 tomlkit = "^0.11.8"
 fontawesomepro = { version = "^6.4.0", source = "fontawesome" }
+mike = { git = "https://github.com/jimporter/mike" }
 mkdocs-material = { git = "https://github.com/squidfunk/mkdocs-material-insiders" }
 
 [tool.poetry.group.repl.dependencies]
