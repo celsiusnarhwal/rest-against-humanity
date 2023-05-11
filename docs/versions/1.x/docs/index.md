@@ -1,12 +1,11 @@
 ---
-title: Docs
 description: A public API for Cards Against Humanity
 ---
 
 # REST Against Humanity
 
 REST Against Humanity is a public API for [_Cards Against Humanity_](https://cardsagainsthumanity.com/).
-You can use it to programatically obtain sets of cards from any of _Cards Against Humanity_'s 71 official packs.
+You can use it to programatically obtain cards from any of _Cards Against Humanity_'s 71 official packs.
 
 You should probably read the [rules of _Cards Against Humanity_](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before
 using this API.
@@ -15,12 +14,9 @@ using this API.
 
 REST Against Humanity can be accessed at [restagainsthumanity.com/api/v1/](https://restagainsthumanity.com/api/v1/).
 
-!!! info
-The code examples provided here are just that - examples! Just because your preferred language doesn't appear here doesn't mean you can't use REST Against Humanity. As long as your language implements HTTP requests and responses - or has a third-party library that does - you're good.
-
 ### Getting a List of Packs
 
-To obtain a list of all available packs, send a GET request to the root endpoint (`/api/v1`).]
+To obtain a list of all available packs, send a GET request to the root endpoint (`/api/v1`).
 
 === ":fontawesome-brands-python: Python (Requests)"
 

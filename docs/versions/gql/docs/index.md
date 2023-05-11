@@ -1,17 +1,16 @@
 ---
-title: Docs
 description: A public API for Cards Against Humanity
 ---
 
 # REST Against Humanity
 
-REST Against Humanity is a public API for Cards Against Humanity. You can use it to programatically obtain sets of
-cards from any of _Cards Against Humanity_'s 71 official packs.
+REST Against Humanity is a public API for [_Cards Against Humanity_](https://cardsagainsthumanity.com). You can use
+it to programatically obtain cards from any of _Cards Against Humanity_'s 71 official packs.
 
 You should probably read the [rules of Cards Against Humanity](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before using
 this API.
 
-REST Against Humanity is accessible at `https://restagainsthumanity.com/api/graphql`.
+REST Against Humanity is accessible at [restagainsthumanity.com/api/graphql](https://restagainsthumanity.com/api/graphql).
 
 !!! graphql "This is a GraphQL API"
 
@@ -26,7 +25,7 @@ GraphiQL.
 
 ## Query Fields
 
-### packs <small markdown>[PackType](#packtype)</small>
+### packs <small markdown>[Pack](#pack)</small>
 
 List _Cards Against Humanity_ packs.
 
@@ -36,16 +35,16 @@ List _Cards Against Humanity_ packs.
 
 ## Objects
 
-### PackType
+### Pack
 
 A _Cards Against Humanity_ pack.
 
-| **Field** | **Type**                              | **Description**         |
-| --------- | ------------------------------------- | ----------------------- |
-| `name`    | `String!`                             | The name of the pack.   |
-| `id`      | `Int!`                                | The ID of the pack.     |
-| `black`   | [`[BlackCardType!]!`](#blackcardtype) | The pack's black cards. |
-| `white`   | [`[WhiteCardType!]!`](#whitecardtype) | The pack's white cards. |
+| **Field** | **Type**                      | **Description**         |
+| --------- | ----------------------------- | ----------------------- |
+| `name`    | `String!`                     | The name of the pack.   |
+| `id`      | `Int!`                        | The ID of the pack.     |
+| `black`   | [`[BlackCard!]!`](#blackcard) | The pack's black cards. |
+| `white`   | [`[WhiteCard!]!`](#whitecard) | The pack's white cards. |
 
 For the `black` field:
 
@@ -59,24 +58,24 @@ For the `white` field:
 | ------------ | ------------------------------------- | ----------------------------------------------- | ------------- |
 | `where`      | [`WhiteCardFilter!`](#whitecardinput) | Criteria by which to filter the cards returned. | No            |
 
-### BlackCardType
+### BlackCard
 
 A _Cards Against Humanity_ black card.
 
-| **Field** | **Type**                 | **Description**                          |
-| --------- | ------------------------ | ---------------------------------------- |
-| `text`    | `String!`                | The text of the card.                    |
-| `pick`    | `Int!`                   | The number of blank spaces the card has. |
-| `pack`    | [`PackType!`](#packtype) | The pack the card belongs to.            |
+| **Field** | **Type**         | **Description**                          |
+| --------- | ---------------- | ---------------------------------------- |
+| `text`    | `String!`        | The text of the card.                    |
+| `pick`    | `Int!`           | The number of blank spaces the card has. |
+| `pack`    | [`Pack!`](#pack) | The pack the card belongs to.            |
 
-### WhiteCardType
+### WhiteCard
 
 A _Cards Against Humanity_ white card.
 
-| **Field** | **Type**                 | **Description**               |
-| --------- | ------------------------ | ----------------------------- |
-| `text`    | `String!`                | The text of the card.         |
-| `pack`    | [`PackType!`](#packtype) | The pack the card belongs to. |
+| **Field** | **Type**         | **Description**               |
+| --------- | ---------------- | ----------------------------- |
+| `text`    | `String!`        | The text of the card.         |
+| `pack`    | [`Pack!`](#pack) | The pack the card belongs to. |
 
 ## Inputs
 
