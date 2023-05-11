@@ -36,7 +36,7 @@ class Mike(BaseModel):
         self._execute(cmd, version)
 
     def alias(self, version: str, alias: str):
-        cmd = ["mike", "alias", version, alias]
+        cmd = ["mike", "alias", "--alias-type", "redirect", version, alias]
         self._execute(cmd, version)
 
     def set_default(self, version: str):

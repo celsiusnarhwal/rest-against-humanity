@@ -65,8 +65,6 @@ plugins:
       kit:
         name: General
   - iconocards
-  - mike:
-      alias_type: redirect
 
 # Extensions
 markdown_extensions:
