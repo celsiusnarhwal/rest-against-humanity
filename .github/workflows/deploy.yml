@@ -57,23 +57,22 @@ jobs:
       origin: ${{ env.ORIGIN_BRANCH }}
       build: ${{ env.BUILD_BRANCH }}
 
-  deploy:
-    name: Deploy Documentation
+  artifact:
+    name: Prepare Artifact
     environment: main
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: Set Build Branch
-        run: echo "BUILD_BRANCH=${{ needs.build.outputs.build }}" >> $GITHUB_ENV
+      - name: Set Origin and Build Branches
+        run: |
+          echo "ORIGIN_BRANCH=${{ needs.build.outputs.origin }}" >> $GITHUB_ENV
+          echo "BUILD_BRANCH=${{ needs.build.outputs.build }}" >> $GITHUB_ENV
 
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ env.BUILD_BRANCH }}
-
-      - name: Set Origin Branch
-        run: echo "ORIGIN_BRANCH=${{ needs.build.outputs.origin }}" >> $GITHUB_ENV
 
       - name: Restore Files
         run: git restore --source origin/${{ env.ORIGIN_BRANCH }} .poetry-version pyproject.toml poetry.lock vercel.json api
@@ -84,11 +83,29 @@ jobs:
       - name: Export requirements.txt
         run: poetry export -o api/requirements.txt
 
-      - name: Deploy to Vercel
-        run: npx vercel --token ${{ secrets.VERCEL_TOKEN }} --yes ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
-        env:
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: .
 
       - name: Delete Build Branch
         run: git push origin --delete ${{ env.BUILD_BRANCH }}
+
+  deploy:
+    name: Deploy Documentation
+    needs: artifact
+    environment: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: site
+          path: site
+
+      - name: Deploy to Vercel
+        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} --cwd site ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
