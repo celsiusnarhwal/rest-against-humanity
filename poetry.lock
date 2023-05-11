@@ -138,14 +138,14 @@ test = ["flake8", "isort", "pytest"]
 
 [[package]]
 name = "certifi"
-version = "2022.12.7"
+version = "2023.5.7"
 description = "Python package for providing Mozilla's CA Bundle."
 category = "dev"
 optional = false
 python-versions = ">=3.6"
 files = [
-    {file = "certifi-2022.12.7-py3-none-any.whl", hash = "sha256:4ad3232f5e926d6718ec31cfc1fcadfde020920e278684144551c91769c7bc18"},
-    {file = "certifi-2022.12.7.tar.gz", hash = "sha256:35824b4c3a97115964b408844d64aa14db1cc518f6562e8d7261699d1350a9e3"},
+    {file = "certifi-2023.5.7-py3-none-any.whl", hash = "sha256:c6c2e98f5c7869efca1f8916fed228dd91539f9f1b444c314c06eef02980c716"},
+    {file = "certifi-2023.5.7.tar.gz", hash = "sha256:0f0d56dc5a6ad56fd4ba36484d6cc34451e1c6548c61daad8c320169f91eddc7"},
 ]
 
 [[package]]
@@ -464,14 +464,7 @@ description = "Font Awesome Pro Files"
 category = "dev"
 optional = false
 python-versions = "*"
-files = [
-    {file = "fontawesomepro-6.4.0-py3-none-any.whl", hash = "sha256:ab6bbf52b111f88381e7f818c3e3b961581f0bbfafa5ca7a8325821b39e0c506"},
-]
-
-[package.source]
-type = "legacy"
-url = "https://dl.fontawesome.com/${FONTAWESOME_PKG_TOKEN}/fontawesome-pro/python/simple"
-reference = "fontawesome"
+files = []
 
 [[package]]
 name = "ghp-import"
@@ -539,14 +532,14 @@ ipython = ["IPython (==5.7.0)", "ipywidgets (==7.1.0)"]
 
 [[package]]
 name = "iconoclast"
-version = "2.0.0"
+version = "2.0.1"
 description = "Font Awesome Pro integration for Material for MkDocs"
 category = "dev"
 optional = false
 python-versions = ">=3.7,<4.0"
 files = [
-    {file = "iconoclast-2.0.0-py3-none-any.whl", hash = "sha256:ace8d7e49f32518be1f3409591bde3f89a6a629d4b9ef6870107115e0062a453"},
-    {file = "iconoclast-2.0.0.tar.gz", hash = "sha256:414335f470cda78c21b809f32303c30f7bfb20b063398ca48c0e6b39c6fd28bf"},
+    {file = "iconoclast-2.0.1-py3-none-any.whl", hash = "sha256:3c4196577f7abcabb7417734c4d09105d40eb545b29d5d063e7d0907b7e25b14"},
+    {file = "iconoclast-2.0.1.tar.gz", hash = "sha256:ee5645e9162d869b05238a978c5310ebf63fd37ff034a9b7c4fc37641ff87159"},
 ]
 
 [package.dependencies]
@@ -977,7 +970,7 @@ min-versions = ["babel (==2.9.0)", "click (==7.0)", "colorama (==0.4)", "ghp-imp
 
 [[package]]
 name = "mkdocs-material"
-version = "9.1.9+insiders.4.32.6"
+version = "9.1.11+insiders.4.33.1"
 description = "Documentation that simply works"
 category = "dev"
 optional = false
@@ -1001,11 +994,14 @@ readtime = ">=2.0"
 regex = ">=2022.4.24"
 requests = ">=2.26"
 
+[package.extras]
+images = ["cairosvg", "pillow"]
+
 [package.source]
 type = "git"
 url = "https://github.com/squidfunk/mkdocs-material-insiders"
 reference = "HEAD"
-resolved_reference = "dc2fd1973cbe73933f270829520bd6626510de5c"
+resolved_reference = "a9dda0990c9b22b7efe7dd7ad9c8b8a775b9df7d"
 
 [[package]]
 name = "mkdocs-material-extensions"

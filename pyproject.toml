@@ -20,7 +20,7 @@ uvicorn = "^0.20.0"
 
 [tool.poetry.group.docs.dependencies]
 cairosvg = "^2.7.0"
-iconoclast = "^2.0.0"
+iconoclast = "^2.0.1"
 path = "^16.6.0"
 pillow = "^9.4.0"
 poethepoet = "^0.19.0"
@@ -59,11 +59,17 @@ script = "scripts.build:build"
 name = "branch"
 options = ["--branch"]
 type = "string"
-default = "vercel"
+default = "__random__"
 
 [[tool.poe.tasks.build.args]]
 name = "push"
 options = ["--push"]
+type = "boolean"
+default = false
+
+[[tool.poe.tasks.build.args]]
+name = "debug"
+options = ["--debug"]
 type = "boolean"
 default = false
 
