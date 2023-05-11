@@ -1,13 +1,11 @@
 ---
 description: A public API for Cards Against Humanity
-hide:
-  - footer
 ---
 
 # REST Against Humanity
 
 REST Against Humanity is a public API for [_Cards Against Humanity_](https://cardsagainsthumanity.com/).
-You can use it to programatically obtain sets of cards from any of _Cards Against Humanity_'s 71 official packs.
+You can use it to programatically obtain cards from any of _Cards Against Humanity_'s 71 official packs.
 
 You should probably read the [rules of _Cards Against Humanity_](https://s3.amazonaws.com/cah/CAH_Rules.pdf) before
 using this API.

@@ -1,0 +1,122 @@
+name: Deploy Documentation
+
+on:
+  push:
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Documentation
+    environment: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Set Up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9.15
+
+      - name: Install Poetry
+        run: pipx install poetry==$(cat .poetry-version)
+
+      - name: Set Up Cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pypoetry
+          key: ${{ runner.os }}-poetry-${{ hashFiles('**/poetry.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-poetry-
+
+      - name: Install Dependencies
+        run: |
+          poetry self add poetry-source-env
+          poetry install --only docs
+          poetry run icl install
+        env:
+          POETRY_REPOSITORIES_MATERIAL_INSIDERS_URL: https://github.com/squidfunk/mkdocs-material-insiders
+          POETRY_HTTP_BASIC_MATERIAL_INSIDERS_USERNAME: celsiusnarhwal
+          POETRY_HTTP_BASIC_MATERIAL_INSIDERS_PASSWORD: ${{ secrets.GH_PAT }}
+          FONTAWESOME_PKG_TOKEN: ${{ secrets.FONTAWESOME_PKG_TOKEN }}
+          FONTAWESOME_API_TOKEN: ${{ secrets.FONTAWESOME_API_TOKEN }}
+
+      - name: Set Origin and Build Branches
+        run: |
+          echo "ORIGIN_BRANCH=${{ github.ref_name }}" >> $GITHUB_ENV
+          echo "BUILD_BRANCH=tmp/${{ github.sha }}" >> $GITHUB_ENV
+
+      - name: Configure Git
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email github-actions[bot]@users.noreply.github.com
+
+      - name: Create Build Branch
+        run: poetry run poe build --branch ${{ env.BUILD_BRANCH }} --push
+        env:
+          FONTAWESOME_API_TOKEN: ${{ secrets.FONTAWESOME_API_TOKEN }}
+    outputs:
+      origin: ${{ env.ORIGIN_BRANCH }}
+      build: ${{ env.BUILD_BRANCH }}
+
+  artifact:
+    name: Prepare Artifact
+    environment: main
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Origin and Build Branches
+        run: |
+          echo "ORIGIN_BRANCH=${{ needs.build.outputs.origin }}" >> $GITHUB_ENV
+          echo "BUILD_BRANCH=${{ needs.build.outputs.build }}" >> $GITHUB_ENV
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          ref: ${{ env.BUILD_BRANCH }}
+
+      - name: Restore Files
+        run: |
+          git restore --source origin/${{ env.ORIGIN_BRANCH }} .gitrestore
+          readarray -t files < .gitrestore
+
+          for file in "${files[@]}"; do
+            git restore --source origin/${{ env.ORIGIN_BRANCH }} $file
+          done
+
+      - name: Install Poetry
+        run: pipx install poetry==$(cat .poetry-version)
+
+      - name: Export requirements.txt
+        run: poetry export -o api/requirements.txt
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: site
+          path: .
+
+      - name: Delete Build Branch
+        run: git push origin --delete ${{ env.BUILD_BRANCH }}
+
+  deploy:
+    name: Deploy Documentation
+    needs: artifact
+    environment: main
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: site
+          path: site
+
+      - name: Deploy to Vercel
+        run: npx vercel --yes --token ${{ secrets.VERCEL_TOKEN }} --cwd site ${{ env.ORIGIN_BRANCH == 'main' && '--prod' || '' }}
+        env:
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
