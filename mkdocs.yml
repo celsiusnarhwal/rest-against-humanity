@@ -62,6 +62,8 @@ plugins:
   - typeset
   - iconoclast:
       css: true
+      kit:
+        name: General
   - iconocards
   - mike:
       alias_type: redirect
