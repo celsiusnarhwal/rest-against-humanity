@@ -33,7 +33,7 @@ jobs:
             ${{ runner.os }}-poetry-
 
       - name: Install Poetry Plugins
-        run: poetry self add poetry-sourc-env
+        run: poetry self add poetry-source-env
 
       - name: Install Dependencies
         run: |
