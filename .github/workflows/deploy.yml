@@ -32,9 +32,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-poetry-
 
+      - name: Install Poetry Plugins
+        run: poetry self add poetry-source-env
+
       - name: Install Dependencies
         run: |
-          poetry self add poetry-source-env
           poetry install --only docs
           poetry run icl install
         env:
