@@ -111,6 +111,9 @@ jobs:
     environment: main
     runs-on: ubuntu-latest
     steps:
+      - name: Set Origin Branch
+        run: echo "ORIGIN_BRANCH=${{ needs.artifact.needs.build.origin }}" >> $GITHUB_ENV
+
       - name: Download Artifact
         uses: actions/download-artifact@v3
         with:
