@@ -1,5 +1,10 @@
 [
   {
+    "version": "gql",
+    "title": "gql",
+    "aliases": []
+  },
+  {
     "version": "2.x",
     "title": "Version 2",
     "aliases": [
