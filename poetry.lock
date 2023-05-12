@@ -483,7 +483,14 @@ description = "Font Awesome Pro Files"
 category = "dev"
 optional = false
 python-versions = "*"
-files = []
+files = [
+    {file = "fontawesomepro-6.4.0-py3-none-any.whl", hash = "sha256:ab6bbf52b111f88381e7f818c3e3b961581f0bbfafa5ca7a8325821b39e0c506"},
+]
+
+[package.source]
+type = "legacy"
+url = "https://dl.fontawesome.com/378FA3D1-48AF-47DE-B3D0-037A7F592036/fontawesome-pro/python/simple"
+reference = "fontawesome"
 
 [[package]]
 name = "ghp-import"
