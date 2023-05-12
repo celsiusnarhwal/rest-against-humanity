@@ -104,6 +104,8 @@ jobs:
 
       - name: Delete Build Branch
         run: git push origin --delete ${{ env.BUILD_BRANCH }}
+    outputs:
+      origin: ${{ env.ORIGIN_BRANCH }}
 
   deploy:
     name: Deploy Documentation
@@ -112,7 +114,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Origin Branch
-        run: echo "ORIGIN_BRANCH=${{ needs.artifact.needs.build.outputs.origin }}" >> $GITHUB_ENV
+        run: echo "ORIGIN_BRANCH=${{ needs.artifact.outputs.origin }}" >> $GITHUB_ENV
 
       - name: Download Artifact
         uses: actions/download-artifact@v3
