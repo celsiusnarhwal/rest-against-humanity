@@ -2,7 +2,9 @@
   {
     "version": "gql",
     "title": "GraphQL",
-    "aliases": []
+    "aliases": [
+      "latest"
+    ]
   },
   {
     "version": "2.x",
